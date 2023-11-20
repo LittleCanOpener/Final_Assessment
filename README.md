@@ -17,6 +17,23 @@ NTV-Dart-Flutter
   <li>Additional requirements: 20%</li>
   <h4>The pass grade for this assignment is 50%</h4>
 </ol><hr>
+<dl><h5>Additional requirements (20%) - Pick one</h5>
+  <dt>• Multiscreen application </dt>
+  <dd>Add a nice looking Home screen that has a "Start Game" button - maybe summary for the rules of the game, or fun gif / design that gets the user excited to
+  play. The game starts with randomly picked word / sentence from a list. To learn
+  how to create multiscreen applications, check out BMI Calcualtor section of the
+  Flutter course. It also covers some advanced UI design and code structuring!
+</dd><hr>
+  <dt>Input custom words / sentences</dt>
+  <dd>Update the starting screen to allow the user to start the game by receiving a
+  word / sentence randomly selected for him, or, they can input the word / sentence themselves. That would allow the user to input his own challenge for others to attempt.</dd><hr>
+  <dt>Change difficulty</dt>
+  <dd>Change the rules of hangman, to allow the user to attempt to solve using easy, medium or hard mode. It’s up the the creator to implement those states - but they could include fewer errors allowed, hide some or all of the wrongly guessed characters or randomly remove successfully guessed character so they have to input it again. Dealers choice.</dd><hr>
+  <dt>Hints</dt>
+  <dd>Allow the user to get a hint of what the word is, at a cost of a failed guess attempt</dd><hr>
+  <dt>Other</dt>
+  <dd>Anything other that you might think of that would make the game more funand engaging!</dd><hr>
+</dl>
 <h1>Technologies</h1>
 <ol>
     <li>
