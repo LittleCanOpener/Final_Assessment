@@ -7,53 +7,16 @@ NTV-Dart-Flutter
     Each solution must be in a separate file, within the same project.
     Please add pictures of final output.
 </p>
-<table>
-  <tr>
-    <th>Assignment 1.</th>
-  </tr>
-  <tr>
-    <td>TEXT</td>
-  </tr>
-  <tr>
-    <th>Title</th>
-  </tr>
-    <tr>
-      <td>
-        <img src="#"><br>
-      </td>
-  </tr>
-  <tr>
-    <th>Assignment 2.</th>
-  </tr>
-  <tr>
-    <td>TEXT</td>
-  </tr>
-  <tr>
-      <th>Title</th>
-  </tr>
-  <tr>
-      <td>
-        <img src="#"><br>
-      </td>
-  </tr>
-    <tr>
-    <th>Assignment 3.</th>
-  </tr>
-    <tr>
-    <td>TEXT</td>
-  </tr>
-    <tr>
-    <th>Title</th>
-  </tr>
-    <tr>
-      <td>
-        <img src="#"><br>
-      </td>
-  </tr>
-    <tr>
-    <th>Assignment 4.</th>
-  </tr>
-</table>
+<strong><h3>Minimum requirements: 80%</h3></strong>
+<ol>
+  <li>Git commit / Work constancy - 25%</li>
+  <li>Program Correctness - 50%</li>
+  <li>Readability: 20%</li>
+  <li>Documentation: 15%</li>
+  <li>Code Elegance: 15%</li>
+  <li>Additional requirements: 20%</li>
+  <h4>The pass grade for this assignment is 50%</h4>
+</ol><hr>
 <h1>Technologies</h1>
 <ol>
     <li>
