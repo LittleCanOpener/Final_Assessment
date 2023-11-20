@@ -89,7 +89,7 @@ NTV-Dart-Flutter
         <li>
         <h3>Android Studio</h3><p>
         <img src="assets/images/icons/android-studio.png" width="40px" height="40x"><br>
-        Why <a href="https://docs.flutter.dev/" target="_blank">Android Studio</a>:<br>Android Studio helps you debug and improve the performance of your code, including inline debugging and performance analysis tools.<br>
+        Why <a href="https://developer.android.com/" target="_blank">Android Studio</a>:<br>Android Studio helps you debug and improve the performance of your code, including inline debugging and performance analysis tools.<br>
         <small><a href="https://developer.android.com/studio" target="_blank">Download here</a></small>
         </p><hr>
     </li>
