@@ -18,7 +18,7 @@ NTV-Dart-Flutter
   <h4>The pass grade for this assignment is 50%</h4>
 </ol><hr>
 <dl><h5>Additional requirements (20%) - Pick one</h5>
-  <dt>• Multiscreen application </dt>
+  <dt>Multiscreen application </dt>
   <dd>Add a nice looking Home screen that has a "Start Game" button - maybe summary for the rules of the game, or fun gif / design that gets the user excited to
   play. The game starts with randomly picked word / sentence from a list. To learn
   how to create multiscreen applications, check out BMI Calcualtor section of the
