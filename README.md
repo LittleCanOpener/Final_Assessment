@@ -1,5 +1,7 @@
 # Project-NTV
+
 NTV-Dart-Flutter
+
 <h1>Criteria</h1>
 <h2>Turn-in instructions:</h2>
 <p>
@@ -7,7 +9,7 @@ NTV-Dart-Flutter
     Each solution must be in a separate file, within the same project.
     Please add pictures of final output.
 </p>
-<strong><h3>Minimum requirements: 80%</h3></strong>
+<h3><strong>Minimum requirements: 80%</strong></h3>
 <ol>
   <li>Git commit / Work constancy - 25%</li>
   <li>Program Correctness - 50%</li>
@@ -21,7 +23,7 @@ NTV-Dart-Flutter
   <dt>Multiscreen application </dt>
   <dd>Add a nice looking Home screen that has a "Start Game" button - maybe summary for the rules of the game, or fun gif / design that gets the user excited to
   play. The game starts with randomly picked word / sentence from a list. To learn
-  how to create multiscreen applications, check out BMI Calcualtor section of the
+  how to create multiscreen applications, check out BMI Calculator section of the
   Flutter course. It also covers some advanced UI design and code structuring!
 </dd><hr>
   <dt>Input custom words / sentences</dt>
@@ -32,7 +34,7 @@ NTV-Dart-Flutter
   <dt>Hints</dt>
   <dd>Allow the user to get a hint of what the word is, at a cost of a failed guess attempt</dd><hr>
   <dt>Other</dt>
-  <dd>Anything other that you might think of that would make the game more funand engaging!</dd><hr>
+  <dd>Anything other that you might think of that would make the game more fun and engaging!</dd><hr>
 </dl>
 <h1>Technologies</h1>
 <ol>
@@ -47,16 +49,16 @@ NTV-Dart-Flutter
         <h3>Github</h3><p>
         <img src="assets/images/icons/github.png" width="40px" height="40x"><br>
         Why <a href="https://github.com/" target="_blank">Github</a>:<br>
-        Well It's used for storing, tracking, and collaborating on software projects. It makes it easy for developers to share code files and collaborate with fellow developers on open-source projects. GitHub also serves as a social networking site where developers can openly network, collaborate, and pitch their work 
+        Well It's used for storing, tracking, and collaborating on software projects. It makes it easy for developers to share code files and collaborate with fellow developers on open-source projects. GitHub also serves as a social networking site where developers can openly network, collaborate, and pitch their work
         </p><hr>
     </li>
     <li>
         <h3>Dart</h3><p>
         <img src="assets/images/icons/dart.png" width="40" height="40"><br>
         Why <a href="https://dart.dev/" target="_blank">Dart</a>:<br>
-        Being a compiled language, Dart allows developers to discover programming errors during the compilation process. 
-        Hence, it is considered a type-safe language. 
-        On the other hand, 
+        Being a compiled language, Dart allows developers to discover programming errors during the compilation process.
+        Hence, it is considered a type-safe language.
+        On the other hand,
         Java is an interpreted language and allows developers to find programming errors during the runtime.
         </p><hr>
     </li>
@@ -74,3 +76,4 @@ NTV-Dart-Flutter
         </p><hr>
     </li>
 </ol>
+
