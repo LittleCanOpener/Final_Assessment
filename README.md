@@ -78,14 +78,18 @@ NTV-Dart-Flutter
     </li>
 </ol>
 <h1>Special Thanks & Acknowledgements</h1>
-<table><tr>
-<th>Hjalti Agustsson 
-    <a href="https://www.linkedin.com/in/hjaltiagustsson/?originalSubdomain=is" target="_blank">
-    <img src="assets/images/icons/linkedin.png" width="20px" height="20x"></a>
-</th>
-<th>Gunnar Geir Helgason
-    <a href="https://www.linkedin.com/in/gunnargh/?utm_source=share&utm_medium=member_mweb&utm_campaign=share_via&utm_content=profile&originalSubdomain=is" target="_blank">
-    <img src="assets/images/icons/linkedin.png" width="20px" height="20x"></a>
-</th>
+<table>
+<tr>
+    <th>Hjalti Agustsson 
+        <a href="https://www.linkedin.com/in/hjaltiagustsson/?originalSubdomain=is" target="_blank">
+        <img src="assets/images/icons/linkedin.png" width="20px" height="20x"></a>
+    </th>
+</tr>
+<tr>
+    <th>Gunnar Geir Helgason
+        <a href="https://www.linkedin.com/in/gunnargh/?utm_source=share&utm_medium=member_mweb&utm_campaign=share_via&utm_content=profile&originalSubdomain=is" target="_blank">
+        <img src="assets/images/icons/linkedin.png" width="20px" height="20x"></a>
+    </th>
+</tr>
 </table>
 
