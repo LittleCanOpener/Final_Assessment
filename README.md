@@ -36,6 +36,7 @@ NTV-Dart-Flutter
   <dt>Other</dt>
   <dd>Anything other that you might think of that would make the game more fun and engaging!</dd><hr>
 </dl>
+<h1>Wireframes</h1>
 <h1>Technologies</h1>
 <ol>
     <li>
@@ -76,4 +77,19 @@ NTV-Dart-Flutter
         </p><hr>
     </li>
 </ol>
+<h1>Special Thanks & Acknowledgements</h1>
+<table>
+<tr>
+    <th>Hjalti Agustsson 
+        <a href="https://www.linkedin.com/in/hjaltiagustsson/?originalSubdomain=is" target="_blank">
+        <img src="assets/images/icons/linkedin.png" width="20px" height="20x"></a>
+    </th>
+</tr>
+<tr>
+    <th>Gunnar Geir Helgason
+        <a href="https://www.linkedin.com/in/gunnargh/?utm_source=share&utm_medium=member_mweb&utm_campaign=share_via&utm_content=profile&originalSubdomain=is" target="_blank">
+        <img src="assets/images/icons/linkedin.png" width="20px" height="20x"></a>
+    </th>
+</tr>
+</table>
 
