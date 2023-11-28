@@ -6,6 +6,7 @@ void main() {
     initialRoute: '/',
     routes: {
       '/': (context) => const MainMenu(),
+      '/second': (context) => const HowToPlay(),
     },
   ));
 }
@@ -25,11 +26,8 @@ class MainMenu extends StatelessWidget {
                 foregroundColor: Colors. red,
             ),
             onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) {
-                return const HowToPlay(title: 'How To Play');
-              }));
-            },
+              Navigator.pushNamed(context, '/second');
+              },
             child: const Text('How To Play'),
           ),
           const SizedBox(width: 50),
