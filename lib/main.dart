@@ -1,15 +1,22 @@
+import 'package:final_assessment/screens/how_to_play.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MaterialApp(
+    initialRoute: '/',
+    routes: {
+      '/': (context) => const MainMenu(),
+    },
+  ));
 }
 // Navigation
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MainMenu extends StatelessWidget {
+  const MainMenu({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: AppBar(
+    return Scaffold(
+      appBar: AppBar(
         leading: const Text('Logo'),
         title: const Text('Main Menu'),
         actions: [
@@ -17,24 +24,15 @@ class MyApp extends StatelessWidget {
             style: TextButton.styleFrom(
                 foregroundColor: Colors. red,
             ),
-            onPressed: () {},
-            child: const Text('Button'),
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) {
+                return const HowToPlay(title: 'How To Play');
+              }));
+            },
+            child: const Text('How To Play'),
           ),
-          TextButton(
-            style: TextButton.styleFrom(
-                foregroundColor: Colors. red,
-            ),
-            onPressed: () {},
-            child: const Text('Button'),
-          ),
-          TextButton(
-            style: TextButton.styleFrom(
-              foregroundColor: Colors. red,
-            ),
-            onPressed: () {},
-            child: const Text('Button'),
-          ),
-
+          const SizedBox(width: 50),
         ],
       ),
     );
