@@ -18,7 +18,7 @@ class HowToPlay extends StatelessWidget {
             onPressed: () {
               Navigator.pushNamed(context, '/');
             },
-            child: const Text('How To Play'),
+            child: const Text('Home'),
           ),
           const SizedBox(width: 50),
         ],
@@ -28,10 +28,12 @@ class HowToPlay extends StatelessWidget {
         children: [
           Expanded(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                 SizedBox(height: 50),
                  Center(
-                  child: Text('PlaceHolder',),
+                  child: Text('PlaceHolder',
+                    style: TextStyle(fontStyle: FontStyle.italic),
+                  ),
                  ),
               ],
             ),

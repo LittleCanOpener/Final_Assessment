@@ -33,6 +33,23 @@ class MainMenu extends StatelessWidget {
           const SizedBox(width: 50),
         ],
       ),
+      // Body for Home Page
+      body: const Row(
+        children: [
+          Expanded(
+            child: Column(
+              children: [
+                SizedBox(height: 50),
+                Center(
+                  child: Text('Hello And Welcome to my first game made with Flutter',
+                    style: TextStyle(fontStyle: FontStyle.italic),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
