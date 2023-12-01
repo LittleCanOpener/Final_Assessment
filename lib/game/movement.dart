@@ -1,40 +1,51 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class _EventListener extends StatelessWidget {
-  const _EventListener({super.key});
+void main() => runApp(const EventListener());
+
+class EventListener extends StatelessWidget {
+  const EventListener({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    throw UnimplementedError();
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Arrow Key Events'),
+        ),
+        body: const ArrowKeyHandler(),
+      ),
+    );
   }
 }
 
-void movement(RawKeyboardListener value) {
-  RawKeyboardListener(
-    autofocus: true,
-    focusNode: FocusNode(),
-    onKey: (event) {
-      if (event.isKeyPressed(LogicalKeyboardKey.arrowUp)) {
-        // CHANGE DIRECTION UP
-        print('Arrow Key Up');
-      }
-      else if (event.isKeyPressed(LogicalKeyboardKey.arrowRight)) {
+class ArrowKeyHandler extends StatelessWidget {
+  const ArrowKeyHandler({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return RawKeyboardListener(
+      autofocus: true,
+      focusNode: FocusNode(),
+      onKey: (event) {
+        if (event.isKeyPressed(LogicalKeyboardKey.arrowUp)) {
+          // CHANGE DIRECTION UP
+          print('Arrow Key Up');
+        } else if (event.isKeyPressed(LogicalKeyboardKey.arrowRight)) {
           // CHANGE DIRECTION Right
-        print('Arrow Key Right');
-      }
-      else if (event.isKeyPressed(LogicalKeyboardKey.arrowLeft)) {
+          print('Arrow Key Right');
+        } else if (event.isKeyPressed(LogicalKeyboardKey.arrowLeft)) {
           // CHANGE DIRECTION Left
-        print('Arrow Key Left');
-      }
-      else if (event.isKeyPressed(LogicalKeyboardKey.arrowDown)) {
-        // CHANGE DIRECTION Down
-        print('Arrow Key Down');
-      }
-    },
-    child:
-    const Listener(
-      onPointerDown: null,
-    ),
-  );
+          print('Arrow Key Left');
+        } else if (event.isKeyPressed(LogicalKeyboardKey.arrowDown)) {
+          // CHANGE DIRECTION Down
+          print('Arrow Key Down');
+        }
+      },
+      child: Container(
+        alignment: Alignment.center,
+        child: const Text('Press Arrow Keys'),
+      ),
+    );
+  }
 }
