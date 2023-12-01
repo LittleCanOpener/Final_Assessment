@@ -44,6 +44,7 @@ class MainMenu extends StatelessWidget {
                   child: Text('Hello And Welcome to my first game made with Flutter',
                     style: TextStyle(fontStyle: FontStyle.italic),
                   ),
+
                 ),
               ],
             ),
