@@ -1,23 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+class _EventListener extends StatelessWidget {
+  const _EventListener({super.key});
 
-void eventListener(PointerEvent details){
+  @override
+  Widget build(BuildContext context) {
+    throw UnimplementedError();
+  }
+}
+
+void movement(RawKeyboardListener value) {
   RawKeyboardListener(
     autofocus: true,
     focusNode: FocusNode(),
     onKey: (event) {
       if (event.isKeyPressed(LogicalKeyboardKey.arrowUp)) {
         // CHANGE DIRECTION UP
+        print('Arrow Key Up');
       }
-      if (event.isKeyPressed(LogicalKeyboardKey.arrowRight)) {
+      else if (event.isKeyPressed(LogicalKeyboardKey.arrowRight)) {
           // CHANGE DIRECTION Right
+        print('Arrow Key Right');
       }
-      if (event.isKeyPressed(LogicalKeyboardKey.arrowLeft)) {
+      else if (event.isKeyPressed(LogicalKeyboardKey.arrowLeft)) {
           // CHANGE DIRECTION Left
+        print('Arrow Key Left');
       }
-      if (event.isKeyPressed(LogicalKeyboardKey.arrowDown)) {
+      else if (event.isKeyPressed(LogicalKeyboardKey.arrowDown)) {
         // CHANGE DIRECTION Down
+        print('Arrow Key Down');
       }
     },
     child:
