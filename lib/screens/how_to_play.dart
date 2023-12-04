@@ -23,50 +23,78 @@ class HowToPlay extends StatelessWidget {
           const SizedBox(width: 50),
         ],
       ),
-      // Body for "How to play"
-      body: const Padding(
-        padding: EdgeInsets.all(16.0),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 20.0),
                 Text(
-              'Greeting:',
-              style: TextStyle(
-                  fontSize: 18.0,
-                  fontStyle: FontStyle.italic
-              ),
+                  'Instructions:',
+                  style: TextStyle(
+                    fontSize: 18.0,
+                    fontStyle: FontStyle.italic,
+                  ),
+                ),
+                Text(
+                  'You eat food to grow. '
+                      '\nYou gain score for each food you eat!'
+                      '\nAvoid crashing into him/herself.'
+                      '\nAvoid crashing into the edges of the screen.',
+                  style: TextStyle(fontSize: 16.0),
+                ),
+                SizedBox(height: 16.0),
+                Text(
+                  'Controls:',
+                  style: TextStyle(
+                    fontSize: 18.0,
+                    fontStyle: FontStyle.italic,
+                  ),
+                ),
+                Text(
+                  '1. PlaceHolder',
+                  style: TextStyle(fontSize: 16.0),
+                ),
+              ],
             ),
-              Text(
-                '1. PlaceHolder',
-                style: TextStyle(fontSize: 16.0),
-              ),
-              SizedBox(height: 16.0),
-              Text(
-                'Instructions:',
-                style: TextStyle(
-                    fontSize: 18.0,
-                    fontStyle: FontStyle.italic
+            const SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.arrow_drop_up),
+                  iconSize: 60,
                 ),
-              ),
-              Text(
-                '1. PlaceHolder',
-                style: TextStyle(fontSize: 16.0),
-              ),
-              SizedBox(height: 16.0),
-              Text(
-                'Controls:',
-                style: TextStyle(
-                    fontSize: 18.0,
-                    fontStyle: FontStyle.italic
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.arrow_left),
+                  iconSize: 60,
                 ),
-              ),
-              Text(
-                '1. PlaceHolder',
-                style: TextStyle(fontSize: 16.0),
-              ),
-            ],
-          ),
+                const SizedBox(width: 20),
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.arrow_drop_down),
+                  iconSize: 60,
+                ),
+                const SizedBox(width: 20),
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.arrow_right),
+                  iconSize: 60,
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );
