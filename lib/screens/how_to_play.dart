@@ -24,21 +24,50 @@ class HowToPlay extends StatelessWidget {
         ],
       ),
       // Body for "How to play"
-      body: const Row(
-        children: [
-          Expanded(
-            child: Column(
-              children: [
-                 SizedBox(height: 50),
-                 Center(
-                  child: Text('PlaceHolder',
-                    style: TextStyle(fontStyle: FontStyle.italic),
-                  ),
-                 ),
-              ],
+      body: const Padding(
+        padding: EdgeInsets.all(16.0),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+                Text(
+              'Greeting:',
+              style: TextStyle(
+                  fontSize: 18.0,
+                  fontStyle: FontStyle.italic
+              ),
             ),
+              Text(
+                '1. PlaceHolder',
+                style: TextStyle(fontSize: 16.0),
+              ),
+              SizedBox(height: 16.0),
+              Text(
+                'Instructions:',
+                style: TextStyle(
+                    fontSize: 18.0,
+                    fontStyle: FontStyle.italic
+                ),
+              ),
+              Text(
+                '1. PlaceHolder',
+                style: TextStyle(fontSize: 16.0),
+              ),
+              SizedBox(height: 16.0),
+              Text(
+                'Controls:',
+                style: TextStyle(
+                    fontSize: 18.0,
+                    fontStyle: FontStyle.italic
+                ),
+              ),
+              Text(
+                '1. PlaceHolder',
+                style: TextStyle(fontSize: 16.0),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
