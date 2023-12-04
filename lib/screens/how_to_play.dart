@@ -1,10 +1,10 @@
+import 'package:final_assessment/game/movement.dart';
 import 'package:flutter/material.dart';
 
 class HowToPlay extends StatelessWidget {
-  const HowToPlay({super.key});
+  const HowToPlay({Key? key}) : super(key: key);
 
   @override
-
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -24,12 +24,12 @@ class HowToPlay extends StatelessWidget {
         ],
       ),
 
-      body: Center(
+      body:  Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Column(
+             const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 20.0),
@@ -56,7 +56,7 @@ class HowToPlay extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '1. PlaceHolder',
+                  '1. Keyboard User Friendly - Arrow Keys',
                   style: TextStyle(fontSize: 16.0),
                 ),
               ],
