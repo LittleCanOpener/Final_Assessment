@@ -1,4 +1,4 @@
-import 'package:final_assessment/game/movement.dart';
+import 'package:final_assessment/game/arrowkey.dart';
 import 'package:flutter/material.dart';
 
 class HowToPlay extends StatelessWidget {
@@ -24,12 +24,12 @@ class HowToPlay extends StatelessWidget {
         ],
       ),
 
-      body:  Center(
+      body: const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-             const Column(
+              Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 20.0),
@@ -58,39 +58,6 @@ class HowToPlay extends StatelessWidget {
                 Text(
                   '1. Keyboard User Friendly - Arrow Keys',
                   style: TextStyle(fontSize: 16.0),
-                ),
-              ],
-            ),
-            const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.arrow_drop_up),
-                  iconSize: 60,
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.arrow_left),
-                  iconSize: 60,
-                ),
-                const SizedBox(width: 20),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.arrow_drop_down),
-                  iconSize: 60,
-                ),
-                const SizedBox(width: 20),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.arrow_right),
-                  iconSize: 60,
                 ),
               ],
             ),
