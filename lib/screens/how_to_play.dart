@@ -1,8 +1,7 @@
-import 'package:final_assessment/game/arrowkey.dart';
 import 'package:flutter/material.dart';
 
 class HowToPlay extends StatelessWidget {
-  const HowToPlay({Key? key}) : super(key: key);
+  const HowToPlay({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +22,7 @@ class HowToPlay extends StatelessWidget {
           const SizedBox(width: 50),
         ],
       ),
-
+      
       body: const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
