@@ -80,12 +80,13 @@ class SnakeGameSketchState extends State<SnakeGameSketch> {
 
   double get height => size.y.toDouble();
   double get width => size.x.toDouble();
-}
+} // SnakeGameSketchState
+
 
 class SnakeGamePainter extends CustomPainter {
   final Function(Canvas, Size) draw;
-
   SnakeGamePainter(this.draw);
+
   @override
   void paint(Canvas canvas, Size size) {
     draw(canvas, size);
@@ -170,111 +171,3 @@ extension on Direction {
     }
   } // Move
 } // _Direction
-
-
-
-
-
-class SnakeGame extends StatefulWidget {
-  const SnakeGame({super.key});
-
-  @override
-  SnakeGameState createState() => SnakeGameState();
-}
-
-class SnakeGameState extends State<SnakeGame> {
-  final int gridPerRow = 20;
-  final int gridPerCol = 40;
-  final fontStyle = const TextStyle(color: Colors.white, fontSize: 20);
-  final randomGen = Random();
-
-  List<List<int>> snake = [[0, 1], [0, 0]];
-  List<int> food = [0, 2];
-  String direction = 'up';
-  bool isPlaying = false;
-
-  void startGame() {
-    // Implement your game start logic here
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: Column(
-        children: <Widget>[
-          Expanded(
-            child: GestureDetector(
-              child: AspectRatio(
-                aspectRatio: gridPerRow / (gridPerCol + 2),
-                child: GridView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: gridPerRow,
-                  ),
-                  itemCount: gridPerRow * gridPerCol,
-                  itemBuilder: (BuildContext context, int index) {
-                    var color;
-                    var x = index % gridPerRow;
-                    var y = (index / gridPerRow).floor();
-
-                    bool isSnakeBody = false;
-                    for (var pos in snake) {
-                      if (pos[0] == x && pos[1] == y) {
-                        isSnakeBody = true;
-                        break;
-                      }
-                    }
-                    if (snake.first[0] == x && snake.first[1] == y) {
-                      color = Colors.green;
-                    } else if (isSnakeBody) {
-                      color = Colors.lightGreenAccent;
-                    } else if (food[0] == x && food[1] == y) {
-                      color = Colors.red;
-                    } else {
-                      color = Colors.grey[800];
-                    }
-                    return Container(
-                      margin: const EdgeInsets.all(1),
-                      decoration: BoxDecoration(
-                        color: color,
-                        shape: BoxShape.circle,
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: isPlaying ? Colors.red : Colors.blue,
-                ),
-                onPressed: () {
-                  setState(() {
-                    if (isPlaying) {
-                      isPlaying = false;
-                    } else {
-                      startGame();
-                    }
-                  });
-                },
-                child: Text(
-                  isPlaying ? 'End' : 'Start',
-                  style: fontStyle,
-                ),
-              ),
-              Text(
-                'Score: ${snake.length - 1}',
-                style: fontStyle,
-              )
-            ],
-          )
-        ],
-      ),
-    );
-  }
-}
