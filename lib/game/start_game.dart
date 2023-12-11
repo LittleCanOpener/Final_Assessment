@@ -3,7 +3,7 @@ import 'dart:math';
 import 'snake.dart';
 
 class SnakeGameSketch extends StatefulWidget {
-  const SnakeGameSketch({Key? key}) : super(key: key);
+  const SnakeGameSketch({super.key});
 
   @override
   SnakeGameSketchState createState() => SnakeGameSketchState();
@@ -24,7 +24,7 @@ class SnakeGameSketchState extends State<SnakeGameSketch> {
   }
 
   void _setup() {
-    size = const Point(300, 400); //  width and height of your canvas
+    size = const Point(300, 400); //  Width and Height of Canvas
     colCount = (width / _pixelsPerCell).floor();
     rowCount = (height / _pixelsPerCell).floor();
     _snake = Snake(position: _getRandomCell());
