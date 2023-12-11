@@ -12,7 +12,7 @@ class HowToPlay extends StatelessWidget {
         actions: [
           TextButton(
             style: TextButton.styleFrom(
-              foregroundColor: Colors. red,
+              foregroundColor: Colors. black,
             ),
             onPressed: () {
               Navigator.pushNamed(context, '/');
