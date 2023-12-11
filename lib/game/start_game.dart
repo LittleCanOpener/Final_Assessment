@@ -3,7 +3,7 @@ import 'dart:math';
 import 'snake.dart';
 
 class SnakeGameSketch extends StatefulWidget {
-  const SnakeGameSketch({super.key});
+  const SnakeGameSketch({Key? key}) : super(key: key);
 
   @override
   SnakeGameSketchState createState() => SnakeGameSketchState();
@@ -15,7 +15,6 @@ class SnakeGameSketchState extends State<SnakeGameSketch> {
   late int rowCount;
   late Point<double> size;
   late Snake _snake;
-
   late bool _isGameOver = false;
 
   @override
@@ -24,8 +23,8 @@ class SnakeGameSketchState extends State<SnakeGameSketch> {
     _setup();
   }
 
-
   void _setup() {
+    size = const Point(300, 400); //  width and height of your canvas
     colCount = (width / _pixelsPerCell).floor();
     rowCount = (height / _pixelsPerCell).floor();
     _snake = Snake(position: _getRandomCell());
@@ -68,15 +67,21 @@ class SnakeGameSketchState extends State<SnakeGameSketch> {
 
   @override
   Widget build(BuildContext context) {
-    return CustomPaint(
-      painter: SnakeGamePainter(draw),
+    return MaterialApp(
+      title: "My App",
+      home: Scaffold(
+        appBar: AppBar(),
+        body: CustomPaint(
+          painter: SnakeGamePainter(draw),
+        ),
+      ),
     );
   }
 
   Point<int> _getRandomCell() {
     final random = Random();
     return Point(random.nextInt(colCount), random.nextInt(rowCount));
-  } // _getRandomCell
+  }
 
   double get height => size.y.toDouble();
   double get width => size.x.toDouble();
@@ -90,6 +95,7 @@ class SnakeGamePainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     draw(canvas, size);
   }
+
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
     return true;
