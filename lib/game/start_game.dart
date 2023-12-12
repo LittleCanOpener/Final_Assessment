@@ -20,7 +20,13 @@ class SnakeGameSketchState extends State<SnakeGameSketch> {
   @override
   void initState() {
     super.initState();
-    _setup();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      size = Point(
+        MediaQuery.of(context).size.width,
+        MediaQuery.of(context).size.height,
+      );
+      _setup();
+    });
   }
 
   void _setup() {
@@ -68,7 +74,7 @@ class SnakeGameSketchState extends State<SnakeGameSketch> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "My App",
+      title: "Snake",
       home: Scaffold(
         appBar: AppBar(),
         body: CustomPaint(
