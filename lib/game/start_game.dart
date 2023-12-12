@@ -25,12 +25,12 @@ class SnakeGameSketchState extends State<SnakeGameSketch> {
         MediaQuery.of(context).size.width,
         MediaQuery.of(context).size.height,
       );
-      _setup();
+      setup();
     });
   }
 
-  void _setup() {
-    size = const Point(300, 400); //  Width and Height of Canvas
+  Future<void> setup() async {
+    size = const Point(500, 500); //  Width and Height of Canvas
     colCount = (width / _pixelsPerCell).floor();
     rowCount = (height / _pixelsPerCell).floor();
     _snake = Snake(position: _getRandomCell());
@@ -50,7 +50,7 @@ class SnakeGameSketchState extends State<SnakeGameSketch> {
 
   void _drawSnake(Canvas canvas) {
     final paint = Paint()
-      ..color = Colors.white;
+      ..color = Colors.brown;
     for (final cell in _snake.cells) {
       canvas.drawRect(
         Rect.fromLTWH(
@@ -70,6 +70,7 @@ class SnakeGameSketchState extends State<SnakeGameSketch> {
     }
     _snake.update();
   }
+
 
   @override
   Widget build(BuildContext context) {

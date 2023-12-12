@@ -29,6 +29,7 @@ class Snake {
     final head = cells.first;
     return head.x >= 0 && head.x < width && head.y >= 0 && head.y < height;
   }
+
   void keyPressed(event) {
     if (event.isKeyPressed(LogicalKeyboardKey.arrowUp)) {
       direction = Direction.up;
