@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
+import 'dart:async';
 import 'snake.dart';
 
 class SnakeGameSketch extends StatefulWidget {
@@ -15,7 +16,7 @@ class SnakeGameSketchState extends State<SnakeGameSketch> {
   late int rowCount;
   late Point<double> size;
   late Snake _snake;
-  late bool _isGameOver = false;
+  late Timer _gameLoop; // Added Timer variable
 
   @override
   void initState() {
@@ -26,11 +27,12 @@ class SnakeGameSketchState extends State<SnakeGameSketch> {
         MediaQuery.of(context).size.height,
       );
       setup();
+      startGameLoop(); // Start the game loop when the widget is initialized
     });
   }
 
   Future<void> setup() async {
-    size = const Point(500, 500); //  Width and Height of Canvas
+    size = const Point(500, 500); // Width and Height of Canvas
     colCount = (width / _pixelsPerCell).floor();
     rowCount = (height / _pixelsPerCell).floor();
     _snake = Snake(position: _getRandomCell());
@@ -66,11 +68,25 @@ class SnakeGameSketchState extends State<SnakeGameSketch> {
 
   void _update() {
     if (!_snake.isInBounds(width: colCount, height: rowCount)) {
-      _isGameOver = true;
+      // Handle game over or other conditions when snake is out of bounds
     }
     _snake.update();
   }
 
+  // Start the game loop
+  void startGameLoop() {
+    _gameLoop = Timer.periodic(const Duration(milliseconds: 100), (Timer timer) {
+      setState(() {
+        // Trigger a redraw on each iteration
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _gameLoop.cancel(); // Cancel the game loop when the widget is disposed
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
