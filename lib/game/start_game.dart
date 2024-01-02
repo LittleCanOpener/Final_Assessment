@@ -93,7 +93,22 @@ class SnakeGameSketchState extends State<SnakeGameSketch> {
     return MaterialApp(
       title: "Snake",
       home: Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          leading: const Text('Logo'),
+          title: const Text('How To Play'),
+          actions: [
+            TextButton(
+              style: TextButton.styleFrom(
+                foregroundColor: Colors. black,
+              ),
+              onPressed: () {
+                Navigator.pushNamed(context, '/');
+              },
+              child: const Text('Home'),
+            ),
+            const SizedBox(width: 50),
+          ],
+        ),
         body: CustomPaint(
           painter: SnakeGamePainter(draw),
         ),
