@@ -16,7 +16,7 @@ class SnakeGameSketchState extends State<SnakeGameSketch> {
   late int rowCount;
   late Point<double> size;
   late Snake _snake;
-  late Timer _gameLoop; // Added Timer variable
+  late Timer _gameLoop; // Added timer variable
 
   @override
   void initState() {
@@ -109,8 +109,14 @@ class SnakeGameSketchState extends State<SnakeGameSketch> {
             const SizedBox(width: 50),
           ],
         ),
-        body: CustomPaint(
-          painter: SnakeGamePainter(draw),
+        body: RawKeyboardListener(
+          focusNode: FocusNode(),
+          onKey: (RawKeyEvent event) {
+            _snake.keyPressed(event);
+          },
+          child: CustomPaint(
+            painter: SnakeGamePainter(draw),
+          ),
         ),
       ),
     );
