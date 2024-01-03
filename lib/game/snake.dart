@@ -25,22 +25,30 @@ class Snake {
     _cells.removeLast();
     _cells.insert(0, newHead);
   } // Update
+
+  void setDirection(Direction newDirection) {
+    if (!newDirection.isOpposite(_direction)) {
+      _direction = newDirection;
+    }
+  }
+
   bool isInBounds({required int width, required int height}) {
     final head = cells.first;
     return head.x >= 0 && head.x < width && head.y >= 0 && head.y < height;
   }
 
-  void keyPressed(event) {
-    if (event.isKeyPressed(LogicalKeyboardKey.arrowUp)) {
-      direction = Direction.up;
-    } else if (event.isKeyPressed(LogicalKeyboardKey.arrowDown)) {
-      direction = Direction.down;
-    } else if (event.isKeyPressed(LogicalKeyboardKey.arrowLeft)) {
-      direction = Direction.left;
-    } else if (event.isKeyPressed(LogicalKeyboardKey.arrowRight)) {
-      direction = Direction.right;
+  void keyPressed(RawKeyEvent event) {
+    final logicalKey = event.logicalKey;
+    if (logicalKey == LogicalKeyboardKey.arrowUp) {
+      setDirection(Direction.up);
+    } else if (logicalKey == LogicalKeyboardKey.arrowDown) {
+      setDirection(Direction.down);
+    } else if (logicalKey == LogicalKeyboardKey.arrowLeft) {
+      setDirection(Direction.left);
+    } else if (logicalKey == LogicalKeyboardKey.arrowRight) {
+      setDirection(Direction.right);
     }
-  } // event
+  }
 } // Snake
 
 enum Direction {

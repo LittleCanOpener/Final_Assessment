@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'dart:math';
 import 'dart:async';
 import 'snake.dart';
@@ -21,6 +22,7 @@ class SnakeGameSketchState extends State<SnakeGameSketch> {
   @override
   void initState() {
     super.initState();
+    _focusNode = FocusNode();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       size = Point(
         MediaQuery.of(context).size.width,
@@ -87,6 +89,7 @@ class SnakeGameSketchState extends State<SnakeGameSketch> {
     _gameLoop.cancel(); // Cancel the game loop when the widget is disposed
     super.dispose();
   }
+  FocusNode _focusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +113,7 @@ class SnakeGameSketchState extends State<SnakeGameSketch> {
           ],
         ),
         body: RawKeyboardListener(
-          focusNode: FocusNode(),
+          focusNode: _focusNode,
           onKey: (RawKeyEvent event) {
             _snake.keyPressed(event);
           },
