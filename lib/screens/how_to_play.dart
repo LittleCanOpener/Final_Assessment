@@ -22,7 +22,6 @@ class HowToPlay extends StatelessWidget {
           const SizedBox(width: 50),
         ],
       ),
-
       body: const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

@@ -8,7 +8,7 @@ void main() {
     routes: {
       '/': (context) => const MainMenu(),
       '/second': (context) => const HowToPlay(),
-      '/third': (context) =>  const SnakeGameSketch(),
+      '/third': (context) =>  const SnakeGame(),
     },
   ));
 }

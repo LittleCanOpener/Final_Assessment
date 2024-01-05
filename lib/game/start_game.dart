@@ -1,59 +1,78 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'dart:math';
 import 'dart:async';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-class SnakeGameSketch extends StatefulWidget {
-  const SnakeGameSketch({super.key});
+class SnakeGameApp extends StatelessWidget {
+  const SnakeGameApp({Key? key}) : super(key: key);
 
   @override
-  SnakeGameSketchState createState() => SnakeGameSketchState();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: "Snake",
+      home: SnakeGame(),
+    );
+  }
 }
 
-class SnakeGameSketchState extends State<SnakeGameSketch> {
+class SnakeGame extends StatefulWidget {
+  const SnakeGame({Key? key}) : super(key: key);
+
+  @override
+  SnakeGameState createState() => SnakeGameState();
+}
+
+class SnakeGameState extends State<SnakeGame> {
+  late Snake _snake;
+  late Timer _gameLoop;
+  late Point<int> _foodPosition;
+  int _score = 0;
   final _pixelsPerCell = 10.0;
   late int colCount;
   late int rowCount;
-  late Point<double> size;
-  late Snake _snake;
-  late Timer _gameLoop;
-  final FocusNode _focusNode = FocusNode();
-  late Point<int> _foodPosition;
+  static final _randomNumber = Random();
+  bool isPlaying = false;
+  Direction _direction = Direction.down;
+  late FocusNode _focusNode;
 
   @override
   void initState() {
     super.initState();
+    _focusNode = FocusNode();
     _focusNode.requestFocus();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      size = Point(
-        MediaQuery.of(context).size.width,
-        MediaQuery.of(context).size.height,
-      );
-      setup();
-      startGameLoop();
+    _startGame();
+  }
+
+  void _startGame() {
+    isPlaying = true;
+    _score = 0;
+    colCount = 50;
+    rowCount = 50;
+    _snake = Snake(position: Point(colCount ~/ 2, rowCount ~/ 2));
+    _foodPosition = _getRandomCell();
+    _gameLoop = Timer.periodic(const Duration(milliseconds: 100), _update);
+  }
+
+  void _update(Timer timer) {
+    if (!isPlaying) {
+      timer.cancel();
+      return;
+    }
+
+    setState(() {
+      _snake.update(_foodPosition, _getRandomCell, _onEat);
     });
   }
 
-  Future<void> setup() async {
-    size = const Point(500, 500);
-    colCount = (width / _pixelsPerCell).floor();
-    rowCount = (height / _pixelsPerCell).floor();
-    _snake = Snake(position: _getRandomCell());
-    _foodPosition = _getRandomCell(); // Initialize food position
-    while (_snake.cells.contains(_foodPosition)) {
-      _foodPosition = _getRandomCell();
-    }
-  }
-
-  Future<void> draw(Canvas canvas, Size size) async {
-    _update();
-    _drawBackground(canvas, size);
-    _drawSnake(canvas);
+  void _onEat() {
+    _score++;
+    _foodPosition = _getRandomCell();
   }
 
   void _drawBackground(Canvas canvas, Size size) {
     final paint = Paint()..color = const Color.fromARGB(255, 51, 51, 51);
     canvas.drawRect(Rect.fromLTWH(0, 0, size.width, size.height), paint);
+
     final foodPaint = Paint()..color = Colors.green;
     canvas.drawRect(
       Rect.fromLTWH(
@@ -81,92 +100,59 @@ class SnakeGameSketchState extends State<SnakeGameSketch> {
     }
   }
 
-  void _update() {
-    if (!_snake.isInBounds(width: colCount, height: rowCount) || _snake.checkCollision()) {
-      // TODO: Handle game over or other conditions when snake is out of bounds or collides
-      // TODO: For example, you can stop the game loop and show a game over screen
-      _gameLoop.cancel();
-      //TODO: game over logic here
-    } else {
-      // Generate a new food position if needed
-      if (_snake.head == _foodPosition) {
-        _foodPosition = _getRandomCell();
-      }
-
-      // Check if the snake ate the food
-      _snake.eatFood(_foodPosition);
-
-      // Update the snake
-      _snake.update();
-    }
-  }
-
-  Future<void> startGameLoop() async {
-    await Future.delayed(const Duration(seconds: 1)); // Delay for 1 second
-    _gameLoop = Timer.periodic(const Duration(milliseconds: 100), (Timer timer) {
-      setState(() {
-        // Trigger a redraw on each iteration
-      });
-    });
-  }
-
   @override
-  void dispose() {
-    _gameLoop.cancel();
-    super.dispose();
-  }
-
-  Point<int> _getRandomCell() {
-    final random = Random();
-    return Point(random.nextInt(colCount), random.nextInt(rowCount));
-  }
-
-  double get height => size.y.toDouble();
-  double get width => size.x.toDouble();
-
-  @override
-  // TODO: STYLE THE GAME
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: "Snake",
-      home: Scaffold(
-        appBar: AppBar(
-          leading: const Text('Logo'),
-          title: const Text('How To Play'),
-          actions: [
-            TextButton(
-              style: TextButton.styleFrom(
-                foregroundColor: Colors.black,
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Snake Game'),
+      ),
+      body: RawKeyboardListener(
+        focusNode: _focusNode,
+        onKey: (RawKeyEvent event) {
+          _snake.keyPressed(event);
+        },
+        child: Container(
+          color: Colors.blueGrey[900],
+          child: Column(
+            children: [
+              // Display the score
+              Text(
+                'Score: $_score',
+                style: const TextStyle(color: Colors.white, fontSize: 20),
               ),
-              onPressed: () {
-                Navigator.pushNamed(context, '/');
-              },
-              child: const Text('Home'),
-            ),
-            const SizedBox(width: 50),
-          ],
-        ),
-        body: RawKeyboardListener(
-          focusNode: _focusNode,
-          onKey: (RawKeyEvent event) {
-            _snake.keyPressed(event);
-          },
-          child: CustomPaint(
-            painter: SnakeGamePainter(draw),
+              Expanded(
+                child: CustomPaint(
+                  painter: SnakeGamePainter(_drawBackground, _drawSnake),
+                ),
+              ),
+            ],
           ),
         ),
       ),
     );
   }
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
+  }
+
+  Point<int> _getRandomCell() {
+    return Point(_randomNumber.nextInt(colCount), _randomNumber.nextInt(rowCount));
+  }
 }
 
 class SnakeGamePainter extends CustomPainter {
-  final Function(Canvas, Size) draw;
-  SnakeGamePainter(this.draw);
+  final Function(Canvas, Size) drawBackground;
+  final Function(Canvas) drawSnake;
+
+  SnakeGamePainter(this.drawBackground, this.drawSnake);
 
   @override
   void paint(Canvas canvas, Size size) {
-    draw(canvas, size);
+    drawBackground(canvas, size);
+    drawSnake(canvas);
   }
 
   @override
@@ -181,39 +167,63 @@ class Snake {
   }) : _cells = [position];
 
   final List<Point<int>> _cells;
+
   List<Point<int>> get cells => _cells;
-
   Point<int> get head => cells.first;
+  bool isGameOver = false;
+  Direction _direction = Direction.down;
 
-  Direction _direction = Direction.right;
   Direction get direction => _direction;
+
   set direction(Direction newDirection) {
     if (!newDirection.isOpposite(_direction)) {
       _direction = newDirection;
     }
   }
+
   void eatFood(Point<int> foodPosition) {
     if (head == foodPosition) {
-      // Snake ate the food, so add a new cell at the food position
       _cells.add(foodPosition);
     }
   }
 
+  bool checkCollision(int rowCount, int colCount) {
+    Point<int> head = _cells.first;
 
-  bool checkCollision() {
+    if (head.x < 0 || head.x >= colCount || head.y < 0 || head.y >= rowCount) {
+      isGameOver = true;
+      return true;
+    }
+
     for (int i = 1; i < _cells.length; i++) {
-      if (_cells[i] == head) {
-        // Collision with the snake's body
+      if (head == _cells[i]) {
+        isGameOver = true;
         return true;
       }
     }
+
     return false;
   }
 
-  void update() {
-    final newHead = direction.move(head);
-    _cells.removeLast();
-    _cells.insert(0, newHead);
+  void update(
+      Point<int> foodPosition,
+      Point<int> Function() getRandomCell,
+      VoidCallback onEat,
+      ) {
+    final newHead = _direction.move(head);
+
+    // Check if the new head is at the food position
+    if (newHead == foodPosition) {
+      // Snake ate the food, so add a new cell at the food position
+      _cells.insert(0, foodPosition);
+      // Callback to notify the game state that the snake ate
+      onEat();
+    } else {
+      // Add the new head at the beginning of the cells
+      _cells.insert(0, newHead);
+      // Remove the last cell to maintain the snake's length
+      _cells.removeLast();
+    }
   }
 
   bool isInBounds({required int width, required int height}) {
@@ -239,14 +249,19 @@ class Snake {
         newDirection = Direction.right;
         break;
       default:
-      // No arrow key pressed, keep the current direction
         return;
     }
 
-    // Set the new direction only if it's not opposite to the current direction
     if (!newDirection.isOpposite(_direction)) {
       _direction = newDirection;
     }
+  }
+
+  void reset({required Point<int> position}) {
+    _cells.clear();
+    _cells.add(position);
+    isGameOver = false;
+    _direction = Direction.down;
   }
 }
 
@@ -284,3 +299,25 @@ extension on Direction {
     }
   }
 }
+
+
+
+// TODO: Consider extracting the game logic into a separate class for better organization and separation of concerns.
+// TODO: Consider using a StatefulWidget for the game screen, so that you can easily reset the game state when needed.
+// TODO: Implement a scoring system to keep track of the player's score based on the number of food items eaten.
+// TODO: Implement a game over screen that displays the final score and allows the player to restart the game.
+// TODO: Add functionality to pause and resume the game. Implement a pause button on the UI for better user experience.
+// TODO: Implement levels or increase the difficulty over time to make the game more challenging as the player progresses.
+// TODO: Add sound effects or background music to enhance the gaming experience. Consider using the audioplayers package.
+// TODO: Implement touch gestures for controlling the snake's direction, making the game more accessible on touch devices.
+// TODO: Add animations for smoother transitions, such as when the snake moves or eats food.
+// TODO: Refactor the code to use constants or enums for color values and other repeated values to improve code readability.
+// TODO: Implement a settings menu where the player can customize game options like speed, grid size, or snake appearance.
+// TODO: Add comments to explain complex parts of the code, making it more understandable for other developers or your future self.
+// TODO: Consider implementing unit tests for critical game logic to ensure the stability of your code.
+// TODO: Optimize the code for performance, especially the draw method, to ensure smooth gameplay on different devices.
+// TODO: Handle screen orientation changes gracefully, preserving the game state and layout.
+// TODO: Consider adding a splash screen or loading indicator while the game is initializing.
+// TODO: Implement a more visually appealing UI, including a game title, better fonts, and overall design improvements.
+// TODO: Allow the player to choose different snake skins or themes.
+// TODO: Implement a tutorial or instructions screen
