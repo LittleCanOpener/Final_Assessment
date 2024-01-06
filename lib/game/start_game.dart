@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class SnakeGameApp extends StatelessWidget {
-  const SnakeGameApp({Key? key}) : super(key: key);
+  const SnakeGameApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: "Snake",
       home: SnakeGame(),
     );
@@ -16,7 +16,7 @@ class SnakeGameApp extends StatelessWidget {
 }
 
 class SnakeGame extends StatefulWidget {
-  const SnakeGame({Key? key}) : super(key: key);
+  const SnakeGame({super.key});
 
   @override
   SnakeGameState createState() => SnakeGameState();
@@ -32,7 +32,7 @@ class SnakeGameState extends State<SnakeGame> {
   late int rowCount;
   static final _randomNumber = Random();
   bool isPlaying = false;
-  Direction _direction = Direction.down;
+  final Direction _direction = Direction.down;
   late FocusNode _focusNode;
 
   @override
