@@ -34,6 +34,8 @@ class SnakeGameState extends State<SnakeGame> {
   bool isPlaying = false;
   final Direction _direction = Direction.down;
   late FocusNode _focusNode;
+  bool showVerticalGridLines = false;
+  bool showHorizontalGridLines = false;
 
   @override
   void initState() {
@@ -83,10 +85,36 @@ class SnakeGameState extends State<SnakeGame> {
       ),
       foodPaint,
     );
+// TODO: Aline the girds correctly
+    // Draw vertical grid lines
+    if (showVerticalGridLines) {
+      for (int x = 0; x <= colCount; x++) {
+        canvas.drawLine(
+          Offset(x * _pixelsPerCell, 0),
+          Offset(x * _pixelsPerCell, size.height),
+          Paint()
+            ..color = Colors.black
+            ..strokeWidth = 2.0,
+        );
+      }
+    }
+// TODO: Aline the girds correctly
+    // Draw horizontal grid lines
+    if (showHorizontalGridLines) {
+      for (int y = 0; y <= rowCount; y++) {
+        canvas.drawLine(
+          Offset(0, y * _pixelsPerCell), // 1 Right, -10 Left
+          Offset(size.width, y * _pixelsPerCell),
+          Paint()
+            ..color = Colors.black
+            ..strokeWidth = 2.0,
+        );
+      }
+    }
   }
 
   void _drawSnake(Canvas canvas) {
-    final paint = Paint()..color = Colors.brown;
+    final paint = Paint()..color = Colors.brown; // Snake Color
     for (final cell in _snake.cells) {
       canvas.drawRect(
         Rect.fromLTWH(
@@ -99,6 +127,7 @@ class SnakeGameState extends State<SnakeGame> {
       );
     }
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -115,20 +144,43 @@ class SnakeGameState extends State<SnakeGame> {
           color: Colors.blueGrey[900],
           child: Column(
             children: [
-              // Display the score
-              Text(
-                'Score: $_score',
-                style: const TextStyle(color: Colors.white, fontSize: 20),
-              ),
+              _buildScoreDisplay(),
               Expanded(
                 child: CustomPaint(
                   painter: SnakeGamePainter(_drawBackground, _drawSnake),
                 ),
               ),
+              _buildToggleButtons(),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildScoreDisplay() {
+    return Text(
+      'Score: $_score',
+      style: const TextStyle(color: Colors.white, fontSize: 20),
+    );
+  }
+
+  Widget _buildToggleButtons() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        _buildToggleButton('Toggle Vertical Grid Lines', _toggleVerticalGridLines),
+        _buildToggleButton('Toggle Horizontal Grid Lines', _toggleHorizontalGridLines),
+      ],
+    );
+  }
+
+  Widget _buildToggleButton(String label, VoidCallback onPressed) {
+    return ElevatedButton(
+      onPressed: () {
+        setState(onPressed);
+      },
+      child: Text(label),
     );
   }
 
@@ -141,6 +193,14 @@ class SnakeGameState extends State<SnakeGame> {
 
   Point<int> _getRandomCell() {
     return Point(_randomNumber.nextInt(colCount), _randomNumber.nextInt(rowCount));
+  }
+
+  void _toggleVerticalGridLines() {
+    showVerticalGridLines = !showVerticalGridLines;
+  }
+
+  void _toggleHorizontalGridLines() {
+    showHorizontalGridLines = !showHorizontalGridLines;
   }
 }
 
