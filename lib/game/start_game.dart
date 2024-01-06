@@ -134,6 +134,7 @@ class SnakeGameState extends State<SnakeGame> {
 
   @override
   void dispose() {
+    _gameLoop.cancel();
     _focusNode.dispose();
     super.dispose();
   }
