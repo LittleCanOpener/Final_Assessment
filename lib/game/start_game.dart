@@ -3,6 +3,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+void main() {
+  runApp(const SnakeGameApp());
+}
+
 class SnakeGameApp extends StatelessWidget {
   const SnakeGameApp({super.key});
 
@@ -32,10 +36,9 @@ class SnakeGameState extends State<SnakeGame> {
   late int rowCount;
   static final _randomNumber = Random();
   bool isPlaying = false;
-  final Direction _direction = Direction.down;
+  late Direction _direction;
   late FocusNode _focusNode;
-  bool showVerticalGridLines = false;
-  bool showHorizontalGridLines = false;
+
 
   @override
   void initState() {
@@ -50,7 +53,8 @@ class SnakeGameState extends State<SnakeGame> {
     _score = 0;
     colCount = 50;
     rowCount = 50;
-    _snake = Snake(position: Point(colCount ~/ 2, rowCount ~/ 2));
+    _direction = Direction.down;
+    _snake = Snake(position: Point(colCount ~/ 2, rowCount ~/ 2), direction: _direction);
     _foodPosition = _getRandomCell();
     _gameLoop = Timer.periodic(const Duration(milliseconds: 100), _update);
   }
@@ -63,7 +67,42 @@ class SnakeGameState extends State<SnakeGame> {
 
     setState(() {
       _snake.update(_foodPosition, _getRandomCell, _onEat);
+
+      // Check for collisions with screen boundaries
+      if (_snake.checkCollision(rowCount, colCount)) {
+        // Game over, stop the game
+        isPlaying = false;
+        timer.cancel();
+        _showGameOverDialog();
+      }
     });
+  }
+  void _showGameOverDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Game Over'),
+          content: Text('Your score: $_score'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                _startGame(); // Restart the game
+              },
+              child: const Text('Restart'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).pop();
+              },
+              child: const Text('Dismiss'),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   void _onEat() {
@@ -72,9 +111,17 @@ class SnakeGameState extends State<SnakeGame> {
   }
 
   void _drawBackground(Canvas canvas, Size size) {
+    // Draw the border
+    final borderPaint = Paint()
+      ..color = Colors.white
+      ..strokeWidth = 2.0;
+    canvas.drawRect(Rect.fromLTWH(0, 0, size.width, size.height), borderPaint);
+
+    // Draw the background
     final paint = Paint()..color = const Color.fromARGB(255, 51, 51, 51);
     canvas.drawRect(Rect.fromLTWH(0, 0, size.width, size.height), paint);
 
+    // Draw food
     final foodPaint = Paint()..color = Colors.green;
     canvas.drawRect(
       Rect.fromLTWH(
@@ -85,32 +132,6 @@ class SnakeGameState extends State<SnakeGame> {
       ),
       foodPaint,
     );
-// TODO: Aline the girds correctly
-    // Draw vertical grid lines
-    if (showVerticalGridLines) {
-      for (int x = 0; x <= colCount; x++) {
-        canvas.drawLine(
-          Offset(x * _pixelsPerCell, 0),
-          Offset(x * _pixelsPerCell, size.height),
-          Paint()
-            ..color = Colors.black
-            ..strokeWidth = 2.0,
-        );
-      }
-    }
-// TODO: Aline the girds correctly
-    // Draw horizontal grid lines
-    if (showHorizontalGridLines) {
-      for (int y = 0; y <= rowCount; y++) {
-        canvas.drawLine(
-          Offset(0, y * _pixelsPerCell), // 1 Right, -10 Left
-          Offset(size.width, y * _pixelsPerCell),
-          Paint()
-            ..color = Colors.black
-            ..strokeWidth = 2.0,
-        );
-      }
-    }
   }
 
   void _drawSnake(Canvas canvas) {
@@ -128,7 +149,6 @@ class SnakeGameState extends State<SnakeGame> {
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -140,18 +160,39 @@ class SnakeGameState extends State<SnakeGame> {
         onKey: (RawKeyEvent event) {
           _snake.keyPressed(event);
         },
-        child: Container(
-          color: Colors.blueGrey[900],
-          child: Column(
-            children: [
-              _buildScoreDisplay(),
-              Expanded(
-                child: CustomPaint(
-                  painter: SnakeGamePainter(_drawBackground, _drawSnake),
-                ),
-              ),
-              _buildToggleButtons(),
-            ],
+        child: Center(
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              // Calculate the maximum size for the game container
+              final maxSize = constraints.biggest.width < constraints.biggest.height
+                  ? constraints.biggest.width
+                  : constraints.biggest.height;
+
+              // Set the maximum size for the game container
+              final containerSize = maxSize * 0.8; // Adjust the factor as needed
+
+              return Stack(
+                alignment: Alignment.center,
+                children: [
+                  Container(
+                    width: containerSize,
+                    height: containerSize,
+                    color: Colors.blueGrey[900],
+                    child: Column(
+                      children: [
+                        _buildScoreDisplay(),
+                        Expanded(
+                          child: CustomPaint(
+                            painter: SnakeGamePainter(_drawBackground, _drawSnake),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  // Positioned widget for the grid lines
+                ],
+              );
+            },
           ),
         ),
       ),
@@ -165,25 +206,6 @@ class SnakeGameState extends State<SnakeGame> {
     );
   }
 
-  Widget _buildToggleButtons() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        _buildToggleButton('Toggle Vertical Grid Lines', _toggleVerticalGridLines),
-        _buildToggleButton('Toggle Horizontal Grid Lines', _toggleHorizontalGridLines),
-      ],
-    );
-  }
-
-  Widget _buildToggleButton(String label, VoidCallback onPressed) {
-    return ElevatedButton(
-      onPressed: () {
-        setState(onPressed);
-      },
-      child: Text(label),
-    );
-  }
-
   @override
   void dispose() {
     _gameLoop.cancel();
@@ -193,14 +215,6 @@ class SnakeGameState extends State<SnakeGame> {
 
   Point<int> _getRandomCell() {
     return Point(_randomNumber.nextInt(colCount), _randomNumber.nextInt(rowCount));
-  }
-
-  void _toggleVerticalGridLines() {
-    showVerticalGridLines = !showVerticalGridLines;
-  }
-
-  void _toggleHorizontalGridLines() {
-    showHorizontalGridLines = !showHorizontalGridLines;
   }
 }
 
@@ -225,15 +239,16 @@ class SnakeGamePainter extends CustomPainter {
 class Snake {
   Snake({
     required Point<int> position,
-  }) : _cells = [position];
+    required Direction direction,
+  }) : _cells = [position],
+        _direction = direction;
 
   final List<Point<int>> _cells;
+  bool isGameOver = false;
+  Direction _direction;
 
   List<Point<int>> get cells => _cells;
   Point<int> get head => cells.first;
-  bool isGameOver = false;
-  Direction _direction = Direction.down;
-
   Direction get direction => _direction;
 
   set direction(Direction newDirection) {
@@ -360,6 +375,7 @@ extension on Direction {
     }
   }
 }
+
 
 
 
