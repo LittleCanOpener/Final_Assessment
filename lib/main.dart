@@ -1,6 +1,6 @@
 import 'package:final_assessment/screens/how_to_play.dart';
-import 'package:final_assessment/game/start_game.dart';
 import 'package:flutter/material.dart';
+import 'screens/start_game.dart';
 
 void main() {
   runApp(MaterialApp(

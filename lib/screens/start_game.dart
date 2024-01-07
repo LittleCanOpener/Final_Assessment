@@ -13,8 +13,10 @@ class SnakeGameApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      title: "Snake",
-      home: SnakeGame(),
+      home: Scaffold(
+        backgroundColor: Colors.black,
+        body: SafeArea(child: SnakeGame()),
+      ),
     );
   }
 }
@@ -31,14 +33,14 @@ class SnakeGameState extends State<SnakeGame> {
   late Timer _gameLoop;
   late Point<int> _foodPosition;
   int _score = 0;
-  final _pixelsPerCell = 10.0;
-  late int colCount;
-  late int rowCount;
+  final int colCount = 50;
+  final int rowCount = 50;
   static final _randomNumber = Random();
   bool isPlaying = false;
   late Direction _direction;
   late FocusNode _focusNode;
-
+  late double _pixelsPerCell;
+  double get padding => 10.0;
 
   @override
   void initState() {
@@ -51,12 +53,15 @@ class SnakeGameState extends State<SnakeGame> {
   void _startGame() {
     isPlaying = true;
     _score = 0;
-    colCount = 50;
-    rowCount = 50;
     _direction = Direction.down;
     _snake = Snake(position: Point(colCount ~/ 2, rowCount ~/ 2), direction: _direction);
     _foodPosition = _getRandomCell();
     _gameLoop = Timer.periodic(const Duration(milliseconds: 100), _update);
+  }
+
+  double get availableSize {
+    final maxSize = MediaQuery.of(context).size.shortestSide * 0.9;
+    return maxSize - (2 * padding);
   }
 
   void _update(Timer timer) {
@@ -65,18 +70,25 @@ class SnakeGameState extends State<SnakeGame> {
       return;
     }
 
+    _updateGame();
+  }
+
+  void _updateGame() {
     setState(() {
       _snake.update(_foodPosition, _getRandomCell, _onEat);
 
-      // Check for collisions with screen boundaries
       if (_snake.checkCollision(rowCount, colCount)) {
-        // Game over, stop the game
-        isPlaying = false;
-        timer.cancel();
-        _showGameOverDialog();
+        _endGame();
       }
     });
   }
+
+  void _endGame() {
+    isPlaying = false;
+    _gameLoop.cancel();
+    _showGameOverDialog();
+  }
+
   void _showGameOverDialog() {
     showDialog(
       context: context,
@@ -111,6 +123,8 @@ class SnakeGameState extends State<SnakeGame> {
   }
 
   void _drawBackground(Canvas canvas, Size size) {
+    const padding = 10.0; // Adjust the padding to match the BoxShadow
+
     // Draw the border
     final borderPaint = Paint()
       ..color = Colors.white
@@ -119,14 +133,14 @@ class SnakeGameState extends State<SnakeGame> {
 
     // Draw the background
     final paint = Paint()..color = const Color.fromARGB(255, 51, 51, 51);
-    canvas.drawRect(Rect.fromLTWH(0, 0, size.width, size.height), paint);
+    canvas.drawRect(Rect.fromLTWH(padding, padding, size.width - 2 * padding, size.height - 2 * padding), paint);
 
     // Draw food
     final foodPaint = Paint()..color = Colors.green;
     canvas.drawRect(
       Rect.fromLTWH(
-        _foodPosition.x * _pixelsPerCell,
-        _foodPosition.y * _pixelsPerCell,
+        _foodPosition.x * _pixelsPerCell + padding,
+        _foodPosition.y * _pixelsPerCell + padding,
         _pixelsPerCell,
         _pixelsPerCell,
       ),
@@ -136,73 +150,26 @@ class SnakeGameState extends State<SnakeGame> {
 
   void _drawSnake(Canvas canvas) {
     final paint = Paint()..color = Colors.brown; // Snake Color
+
+    final cellSize = availableSize / colCount;
+
     for (final cell in _snake.cells) {
       canvas.drawRect(
         Rect.fromLTWH(
-          cell.x * _pixelsPerCell,
-          cell.y * _pixelsPerCell,
-          _pixelsPerCell,
-          _pixelsPerCell,
+          padding + cell.x * cellSize,
+          padding + cell.y * cellSize,
+          cellSize,
+          cellSize,
         ),
         paint,
       );
     }
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Snake Game'),
-      ),
-      body: RawKeyboardListener(
-        focusNode: _focusNode,
-        onKey: (RawKeyEvent event) {
-          _snake.keyPressed(event);
-        },
-        child: Center(
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              // Calculate the maximum size for the game container
-              final maxSize = constraints.biggest.width < constraints.biggest.height
-                  ? constraints.biggest.width
-                  : constraints.biggest.height;
-
-              // Set the maximum size for the game container
-              final containerSize = maxSize * 0.8; // Adjust the factor as needed
-
-              return Stack(
-                alignment: Alignment.center,
-                children: [
-                  Container(
-                    width: containerSize,
-                    height: containerSize,
-                    color: Colors.blueGrey[900],
-                    child: Column(
-                      children: [
-                        _buildScoreDisplay(),
-                        Expanded(
-                          child: CustomPaint(
-                            painter: SnakeGamePainter(_drawBackground, _drawSnake),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  // Positioned widget for the grid lines
-                ],
-              );
-            },
-          ),
-        ),
-      ),
-    );
-  }
-
   Widget _buildScoreDisplay() {
     return Text(
       'Score: $_score',
-      style: const TextStyle(color: Colors.white, fontSize: 20),
+      style: const TextStyle(color: Colors.black, fontSize: 20),
     );
   }
 
@@ -216,13 +183,73 @@ class SnakeGameState extends State<SnakeGame> {
   Point<int> _getRandomCell() {
     return Point(_randomNumber.nextInt(colCount), _randomNumber.nextInt(rowCount));
   }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Snake Game'),
+      ),
+      body: RawKeyboardListener(
+        focusNode: _focusNode,
+        onKey: _snakeKeyPressed,
+        child: Center(
+          child: _buildGameContainer(),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildGameContainer() {
+    final maxSize = MediaQuery.of(context).size.shortestSide * 0.9;
+    const padding = 10.0;
+    final containerSize = maxSize - (2 * padding);
+    _pixelsPerCell = containerSize / colCount;
+
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        _buildGameBackground(containerSize, padding),
+        Column(
+          children: [
+            _buildScoreDisplay(),
+            Expanded(
+              child: CustomPaint(
+                painter: SnakeGamePainter(_drawBackground, _drawSnake, containerSize),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+  Widget _buildGameBackground(double containerSize, double padding) {
+    return Container(
+      width: containerSize,
+      height: containerSize,
+      decoration: BoxDecoration(
+        color: Colors.blueGrey[900],
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.5),
+            blurRadius: 4.0,
+            offset: const Offset(3.5, 3.5),
+          ),
+        ],
+      ),
+    );
+  }
+  void _snakeKeyPressed(RawKeyEvent event) {
+    _snake.keyPressed(event);
+  }
 }
 
 class SnakeGamePainter extends CustomPainter {
   final Function(Canvas, Size) drawBackground;
   final Function(Canvas) drawSnake;
+  final double availableSize;
 
-  SnakeGamePainter(this.drawBackground, this.drawSnake);
+  SnakeGamePainter(this.drawBackground, this.drawSnake, this.availableSize);
 
   @override
   void paint(Canvas canvas, Size size) {
