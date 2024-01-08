@@ -6,11 +6,10 @@ import 'package:google_fonts/google_fonts.dart';
 void main() {
   runApp(MaterialApp(
     theme: ThemeData(
-      primaryColor: Colors.grey, // Your primary color
-      hintColor: Colors.green, // Your accent color
-      scaffoldBackgroundColor: Colors.white70, // Scaffold background color
+      primaryColor: const Color(0xFF3D3D3D), // Your primary color
+      scaffoldBackgroundColor: const Color(0xFF4D4D84), // Scaffold background color
       textTheme: const TextTheme(
-        bodyMedium: TextStyle(color: Colors.black), // Text color
+        bodyMedium: TextStyle(color: Colors.white), // Text color
       ),
     ),
     initialRoute: '/',
@@ -31,6 +30,7 @@ class MainMenu extends StatelessWidget {
       appBar: AppBar(
         leading: const Text('Logo'),
         title: const Text('Main Menu'),
+        backgroundColor: const Color(0xFF4D4D84),
         actions: [
           ElevatedButton(
             style: ElevatedButton.styleFrom(
@@ -71,8 +71,8 @@ class MainMenu extends StatelessWidget {
               'About the Game:',
               style: TextStyle(
                 fontSize: 18.0,
-                fontStyle: FontStyle.italic,
-                color: Theme.of(context).primaryColor,
+                fontFamily: GoogleFonts.lemon().fontFamily,
+                color: Theme.of(context).canvasColor,
               ),
             ),
           ),

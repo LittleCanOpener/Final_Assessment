@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class HowToPlay extends StatelessWidget {
   const HowToPlay({super.key});
@@ -9,6 +10,7 @@ class HowToPlay extends StatelessWidget {
       appBar: AppBar(
         leading: const Text('Logo'),
         title: const Text('How To Play'),
+        backgroundColor: const Color(0xFF4D4D84),
         actions: [
           ElevatedButton(
             style: ElevatedButton.styleFrom(
@@ -22,7 +24,7 @@ class HowToPlay extends StatelessWidget {
           const SizedBox(width: 50),
         ],
       ),
-      body: const Center(
+      body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -30,42 +32,42 @@ class HowToPlay extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(height: 20.0),
+                const SizedBox(height: 40.0),
                 Text(
                   'Instructions:',
                   style: TextStyle(
-                    fontSize: 18.0,
-                    fontStyle: FontStyle.italic,
+                    fontSize: 20.0,
+                    fontFamily: GoogleFonts.lemon().fontFamily,
                   ),
                 ),
-                Text(
+                 const Text(
                   'Welcome to Snake, a classic arcade game where your goal is to control the snake and achieve the highest score possible.',
                   style: TextStyle(fontSize: 16.0),
                 ),
-                SizedBox(height: 16.0),
+                const SizedBox(height: 30.0),
                 Text(
                   'Gameplay:',
                   style: TextStyle(
-                    fontSize: 18.0,
-                    fontStyle: FontStyle.italic,
+                    fontSize: 20.0,
+                    fontFamily: GoogleFonts.lemon().fontFamily,
                   ),
                 ),
-                Text(
+                const Text(
                   '1. Eat food to grow the snake and earn points. Each food item increases your score.'
                       '\n2. Avoid crashing into the snake\'s own body, as it leads to game over.'
-                      '\n3. Be cautious not to collide with the edges of the screen.'
+                      '\n3. Be cautious not to collide with the edges of the screen it leads to game over.'
                       '\n4. The longer the snake, the more challenging the game becomes.',
                   style: TextStyle(fontSize: 16.0),
                 ),
-                SizedBox(height: 16.0),
+                const SizedBox(height: 30.0),
                 Text(
                   'Controls:',
                   style: TextStyle(
-                    fontSize: 18.0,
-                    fontStyle: FontStyle.italic,
+                    fontSize: 20.0,
+                    fontFamily: GoogleFonts.lemon().fontFamily,
                   ),
                 ),
-                Text(
+                const Text(
                   '1. Keyboard User Friendly - Use Arrow Keys to control the snake:'
                       '\n   - Up Arrow: Move Up'
                       '\n   - Down Arrow: Move Down'

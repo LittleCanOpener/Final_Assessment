@@ -111,6 +111,7 @@ class SnakeGameState extends State<SnakeGame> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Snake Game'),
+        backgroundColor: const Color(0xFF4D4D84),
       ),
       body: RawKeyboardListener(
         focusNode: _focusNode,
@@ -154,6 +155,7 @@ class SnakeGameState extends State<SnakeGame> {
     );
   }
 
+  // method is responsible for creating a widget that represents the background of the game.
   Widget _buildGameBackground(double containerSize, double padding) {
     return Container(
       width: containerSize,
@@ -177,6 +179,7 @@ class SnakeGameState extends State<SnakeGame> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('Game Over'),
+          backgroundColor: const Color(0xFFB8DDF9), // Set background color
           content: Text('Your score: $_score'),
           actions: [
             TextButton(
@@ -184,14 +187,20 @@ class SnakeGameState extends State<SnakeGame> {
                 Navigator.of(context).pop();
                 _startGame(); // Restart the game
               },
-              child: const Text('Restart'),
+              style: TextButton.styleFrom(
+                backgroundColor: Theme.of(context).primaryColor,
+              ),
+              child: const Text('Restart', style: TextStyle(color: Colors.white)),
             ),
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
                 Navigator.of(context).pop();
               },
-              child: const Text('Main Menu'),
+              style: TextButton.styleFrom(
+                backgroundColor: Theme.of(context).primaryColor,
+              ),
+              child: const Text('Main Menu', style: TextStyle(color: Colors.white)),
             ),
           ],
         );
@@ -225,18 +234,15 @@ class SnakeGameState extends State<SnakeGame> {
   }
 
   void _drawSnake(Canvas canvas) {
-    final paint = Paint()..color = Colors.brown; // Snake Color
+    final paint = Paint()..color = const Color(0xFFB8DDF9); // Snake Color
     final cellSize = availableSize / colCount;
     for (final cell in _snake.cells) {
       final cellX = padding + cell.x * cellSize;
       final cellY = padding + cell.y * cellSize;
 
       // Check if the snake cell is outside the game area and adjust its position
-      // adjustedX controls the horizontal position.
-      final adjustedX = max(padding - 0, min(cellX, availableSize + padding - cellSize));
-      // adjustedY controls the vertical position.
-      final adjustedY = max(padding - 1, min(cellY, availableSize + padding - cellSize));
-
+      final adjustedX = max(padding, min(cellX, availableSize + padding - cellSize));
+      final adjustedY = max(padding, min(cellY, availableSize + padding - cellSize));
 
       // Draw the adjusted snake cell
       canvas.drawRect(
@@ -249,6 +255,7 @@ class SnakeGameState extends State<SnakeGame> {
         paint,
       );
     }
+
   }
 
   // Cleanup method
