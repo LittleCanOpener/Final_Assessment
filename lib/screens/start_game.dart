@@ -1,25 +1,7 @@
-import 'dart:math';
 import 'dart:async';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-void main() {
-  runApp(const SnakeGameApp());
-}
-
-class SnakeGameApp extends StatelessWidget {
-  const SnakeGameApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        backgroundColor: Colors.black,
-        body: SafeArea(child: SnakeGame()),
-      ),
-    );
-  }
-}
 
 class SnakeGame extends StatefulWidget {
   const SnakeGame({super.key});
@@ -29,6 +11,7 @@ class SnakeGame extends StatefulWidget {
 }
 
 class SnakeGameState extends State<SnakeGame> {
+  // Member variables
   late Snake _snake;
   late Timer _gameLoop;
   late Point<int> _foodPosition;
@@ -41,7 +24,9 @@ class SnakeGameState extends State<SnakeGame> {
   late FocusNode _focusNode;
   late double _pixelsPerCell;
   double get padding => 10.0;
+  final double _gameSize = 0.9; // Default game size
 
+  // Lifecycle Methods
   @override
   void initState() {
     super.initState();
@@ -50,20 +35,45 @@ class SnakeGameState extends State<SnakeGame> {
     _startGame();
   }
 
+  // Initialization methods
   void _startGame() {
     isPlaying = true;
     _score = 0;
     _direction = Direction.down;
     _snake = Snake(position: Point(colCount ~/ 2, rowCount ~/ 2), direction: _direction);
     _foodPosition = _getRandomCell();
-    _gameLoop = Timer.periodic(const Duration(milliseconds: 100), _update);
+
+    // Initial game speed (milliseconds)
+    int initialSpeed = 100;
+
+    // Set up the game loop with an initial speed
+    _gameLoop = Timer.periodic(Duration(milliseconds: initialSpeed), (timer) {
+      _updateGame();
+
+      // Check the score and adjust the game speed every 5 points
+      if (_score % 5 == 0 && _score > 0) {
+        int newSpeed = max(50, initialSpeed - (_score ~/ 5) * 10); // Decrease speed every 5 points
+        if (timer.isActive) {
+          timer.cancel();
+        }
+        _gameLoop = Timer.periodic(Duration(milliseconds: newSpeed), (timer) {
+          _updateGame();
+        });
+      }
+    });
   }
 
+  // Utility methods
   double get availableSize {
-    final maxSize = MediaQuery.of(context).size.shortestSide * 0.9;
+    final maxSize = MediaQuery.of(context).size.shortestSide * _gameSize;
     return maxSize - (2 * padding);
   }
 
+  Point<int> _getRandomCell() {
+    return Point(_randomNumber.nextInt(colCount), _randomNumber.nextInt(rowCount));
+  }
+
+  // Update and rendering methods
   void _update(Timer timer) {
     if (!isPlaying) {
       timer.cancel();
@@ -77,12 +87,88 @@ class SnakeGameState extends State<SnakeGame> {
     setState(() {
       _snake.update(_foodPosition, _getRandomCell, _onEat);
 
+      Point<int> head = _snake.head;
+
+      // Check if the snake goes off-screen
+      if (head.x < 0 || head.x >= colCount || head.y < 0 || head.y >= rowCount) {
+        _endGame();
+        return;
+      }
+
       if (_snake.checkCollision(rowCount, colCount)) {
         _endGame();
       }
     });
   }
 
+  void _snakeKeyPressed(RawKeyEvent event) {
+    _snake.keyPressed(event);
+  }
+
+  // UI rendering methods
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Snake Game'),
+      ),
+      body: RawKeyboardListener(
+        focusNode: _focusNode,
+        onKey: _snakeKeyPressed,
+        child: Center(
+          child: Stack(
+            children: [
+              _buildGameContainer(),
+              Positioned(
+                top: 0,
+                left: 0,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'Score: $_score',
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildGameContainer() {
+    final maxSize = MediaQuery.of(context).size.shortestSide * _gameSize;
+    final containerSize = maxSize - (2 * padding);
+    _pixelsPerCell = containerSize / colCount;
+
+    return Stack(
+      children: [
+        _buildGameBackground(containerSize, padding),
+        Column(
+          children: [
+            Center(
+              child: CustomPaint(
+                painter: SnakeGamePainter(_drawBackground, _drawSnake, containerSize),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildGameBackground(double containerSize, double padding) {
+    return Container(
+      width: containerSize,
+      height: containerSize,
+      decoration: BoxDecoration(
+        color: Theme.of(context).primaryColor, // Use primary color from the theme
+      ),
+    );
+  }
+
+  // Dialog and event handling methods
   void _endGame() {
     isPlaying = false;
     _gameLoop.cancel();
@@ -109,7 +195,7 @@ class SnakeGameState extends State<SnakeGame> {
                 Navigator.of(context).pop();
                 Navigator.of(context).pop();
               },
-              child: const Text('Dismiss'),
+              child: const Text('Main Menu'),
             ),
           ],
         );
@@ -123,17 +209,11 @@ class SnakeGameState extends State<SnakeGame> {
   }
 
   void _drawBackground(Canvas canvas, Size size) {
-    const padding = 10.0; // Adjust the padding to match the BoxShadow
+    final backgroundColor = Theme.of(context).primaryColor;
 
-    // Draw the border
-    final borderPaint = Paint()
-      ..color = Colors.white
-      ..strokeWidth = 2.0;
-    canvas.drawRect(Rect.fromLTWH(0, 0, size.width, size.height), borderPaint);
-
-    // Draw the background
-    final paint = Paint()..color = const Color.fromARGB(255, 51, 51, 51);
-    canvas.drawRect(Rect.fromLTWH(padding, padding, size.width - 2 * padding, size.height - 2 * padding), paint);
+    // Fill the entire canvas with the background color
+    final backgroundPaint = Paint()..color = backgroundColor;
+    canvas.drawRect(Rect.fromLTWH(0, 0, size.width, size.height), backgroundPaint);
 
     // Draw food
     final foodPaint = Paint()..color = Colors.green;
@@ -150,14 +230,23 @@ class SnakeGameState extends State<SnakeGame> {
 
   void _drawSnake(Canvas canvas) {
     final paint = Paint()..color = Colors.brown; // Snake Color
-
     final cellSize = availableSize / colCount;
-
     for (final cell in _snake.cells) {
+      final cellX = padding + cell.x * cellSize;
+      final cellY = padding + cell.y * cellSize;
+
+      // Check if the snake cell is outside the game area and adjust its position
+      // adjustedX controls the horizontal position.
+      final adjustedX = max(padding - 0, min(cellX, availableSize + padding - cellSize));
+      // adjustedY controls the vertical position.
+      final adjustedY = max(padding - 1, min(cellY, availableSize + padding - cellSize));
+
+
+      // Draw the adjusted snake cell
       canvas.drawRect(
         Rect.fromLTWH(
-          padding + cell.x * cellSize,
-          padding + cell.y * cellSize,
+          adjustedX,
+          adjustedY,
           cellSize,
           cellSize,
         ),
@@ -166,81 +255,12 @@ class SnakeGameState extends State<SnakeGame> {
     }
   }
 
-  Widget _buildScoreDisplay() {
-    return Text(
-      'Score: $_score',
-      style: const TextStyle(color: Colors.black, fontSize: 20),
-    );
-  }
-
+  // Cleanup method
   @override
   void dispose() {
     _gameLoop.cancel();
     _focusNode.dispose();
     super.dispose();
-  }
-
-  Point<int> _getRandomCell() {
-    return Point(_randomNumber.nextInt(colCount), _randomNumber.nextInt(rowCount));
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Snake Game'),
-      ),
-      body: RawKeyboardListener(
-        focusNode: _focusNode,
-        onKey: _snakeKeyPressed,
-        child: Center(
-          child: _buildGameContainer(),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildGameContainer() {
-    final maxSize = MediaQuery.of(context).size.shortestSide * 0.9;
-    const padding = 10.0;
-    final containerSize = maxSize - (2 * padding);
-    _pixelsPerCell = containerSize / colCount;
-
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        _buildGameBackground(containerSize, padding),
-        Column(
-          children: [
-            _buildScoreDisplay(),
-            Expanded(
-              child: CustomPaint(
-                painter: SnakeGamePainter(_drawBackground, _drawSnake, containerSize),
-              ),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-  Widget _buildGameBackground(double containerSize, double padding) {
-    return Container(
-      width: containerSize,
-      height: containerSize,
-      decoration: BoxDecoration(
-        color: Colors.blueGrey[900],
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.5),
-            blurRadius: 4.0,
-            offset: const Offset(3.5, 3.5),
-          ),
-        ],
-      ),
-    );
-  }
-  void _snakeKeyPressed(RawKeyEvent event) {
-    _snake.keyPressed(event);
   }
 }
 
@@ -406,13 +426,14 @@ extension on Direction {
 
 
 
+
 // TODO: Consider extracting the game logic into a separate class for better organization and separation of concerns.
 // TODO: Consider using a StatefulWidget for the game screen, so that you can easily reset the game state when needed.
 // TODO: Implement a scoring system to keep track of the player's score based on the number of food items eaten.
 // TODO: Implement a game over screen that displays the final score and allows the player to restart the game.
 // TODO: Add functionality to pause and resume the game. Implement a pause button on the UI for better user experience.
 // TODO: Implement levels or increase the difficulty over time to make the game more challenging as the player progresses.
-// TODO: Add sound effects or background music to enhance the gaming experience. Consider using the audioplayers package.
+// TODO: Add sound effects or background music to enhance the gaming experience. Consider using the audio players package.
 // TODO: Implement touch gestures for controlling the snake's direction, making the game more accessible on touch devices.
 // TODO: Add animations for smoother transitions, such as when the snake moves or eats food.
 // TODO: Refactor the code to use constants or enums for color values and other repeated values to improve code readability.

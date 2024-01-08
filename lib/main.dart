@@ -1,9 +1,18 @@
 import 'package:final_assessment/screens/how_to_play.dart';
 import 'package:flutter/material.dart';
 import 'screens/start_game.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(MaterialApp(
+    theme: ThemeData(
+      primaryColor: Colors.grey, // Your primary color
+      hintColor: Colors.green, // Your accent color
+      scaffoldBackgroundColor: Colors.white70, // Scaffold background color
+      textTheme: const TextTheme(
+        bodyMedium: TextStyle(color: Colors.black), // Text color
+      ),
+    ),
     initialRoute: '/',
     routes: {
       '/': (context) => const MainMenu(),
@@ -23,9 +32,9 @@ class MainMenu extends StatelessWidget {
         leading: const Text('Logo'),
         title: const Text('Main Menu'),
         actions: [
-          TextButton(
-            style: TextButton.styleFrom(
-              foregroundColor: Colors. black,
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Theme.of(context).primaryColor, // Button color from theme
             ),
             onPressed: () {
               Navigator.pushNamed(context, '/second');
@@ -33,9 +42,9 @@ class MainMenu extends StatelessWidget {
             child: const Text('How To Play'),
           ),
           const SizedBox(width: 50),
-          TextButton(
-            style: TextButton.styleFrom(
-              foregroundColor: Colors. black,
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Theme.of(context).primaryColor, // Button color from theme
             ),
             onPressed: () {
               Navigator.pushNamed(context, '/third');
@@ -46,21 +55,38 @@ class MainMenu extends StatelessWidget {
         ],
       ),
       // Body for Home Page
-      body: const Row(
+      body: Column(
         children: [
-          Expanded(
-            child: Column(
-              children: [
-                SizedBox(height: 50),
-                Center(
-                  child: Text('Hello And Welcome to my first game made with Flutter',
-                    style: TextStyle(fontStyle: FontStyle.italic),
-                  ),
-
-                ),
-              ],
+          const SizedBox(height: 50),
+          const Center(
+            child: Text(
+              'Hello and Welcome to my first game made with Flutter!',
+              style: TextStyle(fontStyle: FontStyle.italic),
             ),
           ),
+          const SizedBox(height: 20),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text(
+              'About the Game:',
+              style: TextStyle(
+                fontSize: 18.0,
+                fontStyle: FontStyle.italic,
+                color: Theme.of(context).primaryColor,
+              ),
+            ),
+          ),
+          const SizedBox(height: 10),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text(
+              "I'm excited to share my journey of creating this Snake game using Flutter. "
+                  "It's my first game, and I've learned a lot during the process. "
+                  'Feel free to explore and enjoy the game!',
+              style: TextStyle(fontSize: 16.0),
+            ),
+          ),
+          const SizedBox(height: 20),
         ],
       ),
     );
