@@ -119,6 +119,7 @@ class SnakeGameState extends State<SnakeGame> {
           child: Stack(
             children: [
               _buildGameContainer(),
+              // Building the Score on the UI
               Positioned(
                 top: 0,
                 left: 0,
@@ -137,6 +138,7 @@ class SnakeGameState extends State<SnakeGame> {
     );
   }
 
+  // method, which returns a container containing the game background, score display, and snake.
   Widget _buildGameContainer() {
     final maxSize = MediaQuery.of(context).size.shortestSide * _gameSize;
     final containerSize = maxSize - (2 * padding);
@@ -145,14 +147,8 @@ class SnakeGameState extends State<SnakeGame> {
     return Stack(
       children: [
         _buildGameBackground(containerSize, padding),
-        Column(
-          children: [
-            Center(
-              child: CustomPaint(
-                painter: SnakeGamePainter(_drawBackground, _drawSnake, containerSize),
-              ),
-            ),
-          ],
+        CustomPaint(
+          painter: SnakeGamePainter(_drawBackground, _drawSnake, containerSize),
         ),
       ],
     );
@@ -273,8 +269,9 @@ class SnakeGamePainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    drawBackground(canvas, size);
     drawSnake(canvas);
+    drawBackground(canvas, size);
+
   }
 
   @override
