@@ -143,8 +143,19 @@ NTV-Dart-Flutter
 </tr>
 <tr>
     <th>Gunnar Geir Helgason
-        <a href="https://www.linkedin.com/in/gunnargh/?utm_source=share&utm_medium=member_mweb&utm_campaign=share_via&utm_content=profile&originalSubdomain=is" target="_blank">
-        <img src="assets/images/icons/linkedin.png" width="20px" height="20x"></a>
+        <a href="https://www.linkedin.com/in/gunnargh/?utm_source=share&utm_medium=member_mweb&utm_campaign=share_via&utm_content=profile&originalSubdomain=is" target="_blank"><img src="assets/images/icons/linkedin.png" width="20px" height="20x"></a>
+    </th>
+</tr>
+<tr>
+    <th>SuperDeclarative!<a href="https://www.youtube.com/@SuperDeclarative" target="_blank"><img src="assets/images/icons/youtube.png" width="50px" height="25x"></a>
+    </th>
+</tr>
+<tr>
+    <th>dbestech<a href="https://www.youtube.com/@dbestech" target="_blank"><img src="assets/images/icons/youtube.png" width="50px" height="25x"></a>
+    </th>
+</tr>
+<tr>
+    <th>A Day Code<a href="https://www.youtube.com/@adaycode2972" target="_blank"><img src="assets/images/icons/youtube.png" width="50px" height="25x"></a>
     </th>
 </tr>
 </table>
