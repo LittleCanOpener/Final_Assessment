@@ -69,11 +69,30 @@ NTV-Dart-Flutter
         Why <a href="https://docs.flutter.dev/" target="_blank">Flutter</a>:<br>Allows developers to build a single codebase and use it for several platforms such as the web, desktop and mobile. This results in quicker app launch and is cost effective. Reduced Development Time: The requirements for Flutter application development are much lower.<br>
         </p><hr>
     </li>
-        <li>
+    <li>
         <h3>Android Studio</h3><p>
         <img src="assets/images/icons/android-studio.png" width="40px" height="40x"><br>
         Why <a href="https://developer.android.com/" target="_blank">Android Studio</a>:<br>Android Studio helps you debug and improve the performance of your code, including inline debugging and performance analysis tools.<br>
         <small><a href="https://developer.android.com/studio" target="_blank">Download here</a></small>
+        </p><hr>
+    </li>
+    <li>
+        <h3>Google Fonts</h3><p>
+        <img src="assets/images/icons/googlefonts.png" width="40px" height="40x"><br>
+        Why <a href="https://fonts.google.com/" target="_blank">Google Fonts</a>:<br>Google Fonts is a free and widely-used service provided by Google that offers a diverse collection of web fonts that can be easily embedded into websites.<br>
+        What was used for this project <a href="https://fonts.google.com/specimen/Lemon" target="_blank">Lemon</a>.
+        </p><hr>
+    </li>
+    <li>
+        <h3>WebAIM</h3><p>
+        <img src="assets/images/icons/webaim.png" width="150px" height="40x"><br>
+        Why <a href="#" target="_blank">WebAIM</a>:<br>PLACEHOLDER TEXT<br>
+        </p><hr>
+    </li>
+    <li>
+        <h3>PLACEHOLDER</h3><p>
+        <img src="#" width="40px" height="40x"><br>
+        Why <a href="#" target="_blank">PLACEHOLDER</a>:<br>PLACEHOLDER TEXT<br>
         </p><hr>
     </li>
 </ol>
