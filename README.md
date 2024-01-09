@@ -69,13 +69,22 @@ NTV-Dart-Flutter
         Hence, it is considered a type-safe language.
         On the other hand,
         Java is an interpreted language and allows developers to find programming errors during the runtime.
-        </p><hr>
+        </p>
+        <details>
+            <summary>Sources</summary>
+            <a href="https://pub.dev/packages/snake" target="_blank">PubDev-Snake</a><br>
+            <a href="https://pub.dev/documentation/snake/latest/snake/snake-library.html" target="_blank">PubDev-Snake-Library</a>
+        </details><hr>
     </li>
     <li>
         <h3>Flutter</h3><p>
         <img src="assets/images/icons/flutter.png" width="140px" height="40x"><br>
         Why <a href="https://docs.flutter.dev/" target="_blank">Flutter</a>:<br>Allows developers to build a single codebase and use it for several platforms such as the web, desktop and mobile. This results in quicker app launch and is cost effective. Reduced Development Time: The requirements for Flutter application development are much lower.<br>
-        </p><hr>
+        </p>
+        <details>
+            <summary>Sources</summary>
+            <a href="https://docs.flutter.dev/release/archive?tab=windows" target="_blank">Flutter-SDK-Archive</a><br>
+        </details><hr>
     </li>
     <li>
         <h3>Android Studio</h3><p>
