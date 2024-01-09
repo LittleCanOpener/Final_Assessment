@@ -41,7 +41,9 @@ class HowToPlay extends StatelessWidget {
                   ),
                 ),
                  const Text(
-                  'Welcome to Snake, a classic arcade game where your goal is to control the snake and achieve the highest score possible.',
+                  'Welcome to Snake, a classic arcade game where your goal is to control the snake and achieve the highest score possible.'
+                     '\n Snake game is credited to Taneli Armanto, who created it for Nokia phones in the late 1990s.'
+                      '\n It gained immense popularity as a built-in game on Nokia mobile devices.',
                   style: TextStyle(fontSize: 16.0),
                 ),
                 const SizedBox(height: 30.0),
@@ -72,7 +74,8 @@ class HowToPlay extends StatelessWidget {
                       '\n   - Up Arrow: Move Up'
                       '\n   - Down Arrow: Move Down'
                       '\n   - Left Arrow: Move Left'
-                      '\n   - Right Arrow: Move Right',
+                      '\n   - Right Arrow: Move Right'
+                      '\n   - Note that you cannot go the opposite way of your current direction',
                   style: TextStyle(fontSize: 16.0),
                 ),
               ],
