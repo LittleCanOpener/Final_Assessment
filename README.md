@@ -120,7 +120,7 @@ NTV-Dart-Flutter
         Why <a href="https://chat.openai.com/" target="_blank">ChatGPT 3.5</a>:<br>ChatGPT is a natural language processing tool driven by AI technology that allows you to have human-like conversations and much more with the chatbot. The language model can answer questions and assist you with tasks, such as composing emails, essays, and code. It's currently open to use by the public for free.<br>
         </p><details>
         <summary>Good to Know about ChatGPT Before Use:</summary>
-        <ol>
+        <ul>
         <li>
         <strong>Clearly Define Your Task:</strong>
             Clearly articulate your task or question. The more specific and detailed your input, the more focused and relevant the response will be.
@@ -160,7 +160,7 @@ NTV-Dart-Flutter
         <li>
             Remember, while ChatGPT is a powerful tool, it's not infallible. Always verify critical information from reliable sources. Additionally, OpenAI continues to improve and update its models, so staying informed about any new features or changes can enhance your experience.
         </li>
-        </ol>
+        </ul>
         </details><hr>
     </li>
     <li>
