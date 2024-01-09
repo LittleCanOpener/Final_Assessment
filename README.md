@@ -36,7 +36,6 @@ NTV-Dart-Flutter
   <dt>Other</dt>
   <dd>Anything other that you might think of that would make the game more fun and engaging!</dd><hr>
 </dl>
-<h1>Wireframes</h1>
 <h1>Technologies</h1>
 <ol>
     <li>
@@ -164,9 +163,25 @@ NTV-Dart-Flutter
         </details><hr>
     </li>
     <li>
-        <h3>PLACEHOLDER</h3><p>
-        <img src="#" width="40px" height="40x"><br>
-        Why <a href="#" target="_blank">PLACEHOLDER</a>:<br>PLACEHOLDER TEXT<br>
+        <h3>Balsamiq Wireframes</h3><p>
+        <img src="assets/images/icons/balsamiq-wireframes.png" width="40px" height="40x"><br>
+        Why <a href="https://balsamiq.com/" target="_blank">Balsamiq Wireframes</a>:<br>is a rapid low-fidelity UI wireframing tool that reproduces the experience of sketching on a notepad or whiteboard, but using a computer. It really forces you to focus on structure and content, avoiding lengthy discussions about colors and details that should come later in the process.<br>
+        <details>
+            <summary>WireFrame - Main Menu Screen</summary>
+            <img src="assets/images/wireframes/wireframe-main.png"><br>
+        </details>
+        <details>
+            <summary>WireFrame - Snake Game Screen</summary>
+            <img src="assets/images/wireframes/wireframe-snake.png"><br>
+        </details>
+        <details>
+            <summary>WireFrame - Score Screen</summary>
+            <img src="assets/images/wireframes/wireframe-score.png"><br>
+        </details>
+        <details>
+            <summary>WireFrame - Alert Screen</summary>
+            <img src="assets/images/wireframes/wireframe-alert.png"><br>
+        </details>
         </p><hr>
     </li>
     <li>
