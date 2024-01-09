@@ -86,7 +86,8 @@ NTV-Dart-Flutter
     <li>
         <h3>WebAIM</h3><p>
         <img src="assets/images/icons/webaim.png" width="150px" height="40x"><br>
-        Why <a href="#" target="_blank">WebAIM</a>:<br>PLACEHOLDER TEXT<br>
+        Why <a href="#" target="_blank">WebAIM</a>:<br>WebAIM's mission is to expand the potential of the web for people with disabilities.<br> 
+        We empower individuals and organizations to create and deliver accessible content by providing knowledge, technical skills, tools, organizational leadership strategies, and vision.<br>
         </p><hr>
     </li>
     <li>
