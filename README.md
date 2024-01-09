@@ -54,6 +54,14 @@ NTV-Dart-Flutter
         </p><hr>
     </li>
     <li>
+        <h3>Github-Desktop</h3><p>
+        <img src="assets/images/icons/github-desktop.png" width="40px" height="40x"><br>
+        Why <a href="https://desktop.github.com/" target="_blank">Github-Desktop</a>:
+        <br>If you're new to Git and GitHub, you may find it easier to use GitHub Desktop than to use Git on the command line. GitHub Desktop has a graphical user interface that simplifies commands and helps you visualize changes.<br>
+        <small><a href="https://desktop.github.com/" target="_blank">Download here</a></small>
+        </p><hr>
+    </li>
+    <li>
         <h3>Dart</h3><p>
         <img src="assets/images/icons/dart.png" width="40" height="40"><br>
         Why <a href="https://dart.dev/" target="_blank">Dart</a>:<br>
@@ -96,12 +104,6 @@ NTV-Dart-Flutter
             <img src="assets/images/contrast-snake-background.png">
         </p>
         </details><hr>
-    </li>
-    <li>
-        <h3>PLACEHOLDER</h3><p>
-        <img src="#" width="40px" height="40x"><br>
-        Why <a href="#" target="_blank">PLACEHOLDER</a>:<br>PLACEHOLDER TEXT<br>
-        </p><hr>
     </li>
     <li>
         <h3>PLACEHOLDER</h3><p>
