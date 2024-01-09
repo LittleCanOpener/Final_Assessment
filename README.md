@@ -115,10 +115,53 @@ NTV-Dart-Flutter
         </details><hr>
     </li>
     <li>
-        <h3>PLACEHOLDER</h3><p>
-        <img src="#" width="40px" height="40x"><br>
-        Why <a href="#" target="_blank">PLACEHOLDER</a>:<br>PLACEHOLDER TEXT<br>
-        </p><hr>
+        <h3>Chat-GPT</h3><p>
+        <img src="assets/images/icons/chatgpt.png" width="40px" height="40x"><br>
+        Why <a href="https://chat.openai.com/" target="_blank">ChatGPT 3.5</a>:<br>ChatGPT is a natural language processing tool driven by AI technology that allows you to have human-like conversations and much more with the chatbot. The language model can answer questions and assist you with tasks, such as composing emails, essays, and code. It's currently open to use by the public for free.<br>
+        </p><details>
+        <summary>Good to Know about ChatGPT Before Use:</summary>
+        <ol>
+        <li>
+        <strong>Clearly Define Your Task:</strong>
+            Clearly articulate your task or question. The more specific and detailed your input, the more focused and relevant the response will be.
+        </li>
+        <li>
+            <strong>Iterative Questioning:</strong>
+            If the initial response is not fully satisfying or if you need more details, try asking follow-up questions. This can help you refine your understanding and gather more information on the topic.
+        </li>
+        <li>
+            <strong>Provide Context:</strong>
+            Offer additional context or background information related to your question. This can help ChatGPT generate more accurate and relevant responses based on the context you provide.
+        </li>
+        <li>
+            <strong>Experiment with Prompt Engineering:</strong>
+            Play around with the way you structure your prompts. Sometimes, rephrasing or restructuring the question can lead to better or more informative responses.
+        </li>
+        <li>
+            <strong>Specify the Level of Detail:</strong>
+            If you're looking for a broad overview, make that clear. If you need a detailed explanation, specify that in your prompt. Tailoring your requests to the level of detail you seek can enhance the relevance of the responses.
+        </li>
+        <li>
+            <strong>Explore Multiple Angles:</strong>
+            Ask questions from different perspectives or angles to gain a more comprehensive understanding of the topic. This can help you uncover nuances and different facets of the information
+        </li>
+        <li>
+            <strong>Verify Information:</strong>
+            Use external sources to verify the information provided by ChatGPT. While the model is powerful, it's essential to cross-check the information for accuracy.
+        </li>
+        <li>
+            <strong>Ask for Clarifications:</strong>
+            If a response is ambiguous or unclear, ask for clarifications. This can help you get more precise information and avoid any misunderstandings.
+        </li>
+        <li>
+            <strong>Take Notes:</strong>
+            As you interact with ChatGPT, take notes on the information you find valuable. This can help you organize and remember the knowledge you gain during the session.<hr>
+        </li>
+        <li>
+            Remember, while ChatGPT is a powerful tool, it's not infallible. Always verify critical information from reliable sources. Additionally, OpenAI continues to improve and update its models, so staying informed about any new features or changes can enhance your experience.
+        </li>
+        </ol>
+        </details><hr>
     </li>
     <li>
         <h3>PLACEHOLDER</h3><p>
