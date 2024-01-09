@@ -28,7 +28,7 @@ class MainMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const Text('Logo'),
+        leading: const Image(image: AssetImage('assets/images/snake-logo.png')),
         title: const Text('Main Menu'),
         backgroundColor: const Color(0xFF4D4D84),
         actions: [
