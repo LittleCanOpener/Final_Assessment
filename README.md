@@ -1,8 +1,5 @@
-# Project-NTV
-
-NTV-Dart-Flutter
+# Project-NTV-SnakeGame-2023
 <img src="assets/images/snake-logo.png">
-
 <h1>Criteria</h1>
 <h2>Turn-in instructions:</h2>
 <p>
