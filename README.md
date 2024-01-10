@@ -33,7 +33,31 @@
   <dd>Allow the user to get a hint of what the word is, at a cost of a failed guess attempt</dd><hr>
   <dt>Other</dt>
   <dd>Anything other that you might think of that would make the game more fun and engaging!</dd><hr>
-</dl>
+</dl><br>
+<h1>Color Scheme</h1>
+<p>The Color scheme was chosen with contrast in mind and <a href="https://github.com/LittleCanOpener/Final_Assessment?tab=readme-ov-file#webaim" target="_blank">WebAIM</a> Helped alot</p>
+<ul>
+    <li>
+        <a href="https://www.color-hex.com/color/4d4d84" target="_blank">Primary Color</a><br>
+        <img src="assets/images/color-scheme/color-purple.png">
+    </li>
+    <li>
+        <a href="https://www.color-hex.com/color/3d3d3d" target="_blank">Secondary Color</a><br>
+        <img src="assets/images/color-scheme/color-gray.png">
+    </li>
+    <li>
+        <a href="https://www.color-hex.com/color/ffffff" target="_blank">Text Color</a><br>
+        <img src="assets/images/color-scheme/color-white.png">
+    </li>
+    <li>
+        <a href="https://www.color-hex.com/color/b8ddf9" target="_blank">Snake Color</a><br>
+        <img src="assets/images/color-scheme/color-teal.png">
+    </li>
+    <li>
+        <a href="https://www.color-hex.com/color/008000" target="_blank">Food Color</a><br>
+        <img src="assets/images/color-scheme/color-green.png">
+    </li>
+</ul>
 <h1>Technologies</h1>
 <ol>
     <li>
@@ -186,9 +210,9 @@
         </p><hr>
     </li>
     <li>
-        <h3>PLACEHOLDER</h3><p>
-        <img src="#" width="40px" height="40x"><br>
-        Why <a href="#" target="_blank">PLACEHOLDER</a>:<br>PLACEHOLDER TEXT<br>
+        <h3>Color-Hex</h3><p>
+        <img src="https://www.color-hex.com/logo.png" width="80px" height="40x"><br>
+        Why <a href="https://www.color-hex.com/" target="_blank">Color-Hex</a>:<br>Using hex color codes to represent different colors is an easy way to differentiate between colors. Once you understand how they work, you can easily change the red, blue, or green values to create a different shade.<br>
         </p><hr>
     </li>
 </ol>
