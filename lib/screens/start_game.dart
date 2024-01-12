@@ -241,8 +241,8 @@ class SnakeGameState extends State<SnakeGame> {
       final cellY = padding + cell.y * cellSize;
 
       // Check if the snake cell is outside the game area and adjust its position
-      final adjustedX = max(padding, min(cellX, availableSize - cellSize));
-      final adjustedY = max(padding, min(cellY, availableSize - cellSize));
+      final adjustedX = max(padding -10, min(cellX, availableSize - cellSize));
+      final adjustedY = max(padding -10, min(cellY, availableSize - cellSize));
 
       // Draw the adjusted snake cell
       canvas.drawRect(
