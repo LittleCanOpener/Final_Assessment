@@ -23,7 +23,7 @@ class SnakeGameState extends State<SnakeGame> {
   late Direction _direction;
   late FocusNode _focusNode;
   late double _pixelsPerCell;
-  double get padding => 10.0;
+  double get padding => 10;
   final double _gameSize = 0.9; // Default game size
 
   // Lifecycle Methods
@@ -241,8 +241,8 @@ class SnakeGameState extends State<SnakeGame> {
       final cellY = padding + cell.y * cellSize;
 
       // Check if the snake cell is outside the game area and adjust its position
-      final adjustedX = max(padding, min(cellX, availableSize + padding - cellSize));
-      final adjustedY = max(padding, min(cellY, availableSize + padding - cellSize));
+      final adjustedX = max(padding, min(cellX, availableSize - cellSize));
+      final adjustedY = max(padding, min(cellY, availableSize - cellSize));
 
       // Draw the adjusted snake cell
       canvas.drawRect(
@@ -426,27 +426,3 @@ extension on Direction {
     }
   }
 }
-
-
-
-
-
-// TODO: Consider extracting the game logic into a separate class for better organization and separation of concerns.
-// TODO: Consider using a StatefulWidget for the game screen, so that you can easily reset the game state when needed.
-// TODO: Implement a scoring system to keep track of the player's score based on the number of food items eaten.
-// TODO: Implement a game over screen that displays the final score and allows the player to restart the game.
-// TODO: Add functionality to pause and resume the game. Implement a pause button on the UI for better user experience.
-// TODO: Implement levels or increase the difficulty over time to make the game more challenging as the player progresses.
-// TODO: Add sound effects or background music to enhance the gaming experience. Consider using the audio players package.
-// TODO: Implement touch gestures for controlling the snake's direction, making the game more accessible on touch devices.
-// TODO: Add animations for smoother transitions, such as when the snake moves or eats food.
-// TODO: Refactor the code to use constants or enums for color values and other repeated values to improve code readability.
-// TODO: Implement a settings menu where the player can customize game options like speed, grid size, or snake appearance.
-// TODO: Add comments to explain complex parts of the code, making it more understandable for other developers or your future self.
-// TODO: Consider implementing unit tests for critical game logic to ensure the stability of your code.
-// TODO: Optimize the code for performance, especially the draw method, to ensure smooth gameplay on different devices.
-// TODO: Handle screen orientation changes gracefully, preserving the game state and layout.
-// TODO: Consider adding a splash screen or loading indicator while the game is initializing.
-// TODO: Implement a more visually appealing UI, including a game title, better fonts, and overall design improvements.
-// TODO: Allow the player to choose different snake skins or themes.
-// TODO: Implement a tutorial or instructions screen
