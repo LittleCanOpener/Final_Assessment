@@ -34,6 +34,25 @@
   <dt>Other</dt>
   <dd>Anything other that you might think of that would make the game more fun and engaging!</dd><hr>
 </dl><br>
+<h1>Features</h1>
+<ol>
+    <li>
+        Main Menu<br>
+        <img src="assets/images/screens/mainmenu-screen.png">
+    </li>
+    <li>
+        How To Play<br>
+        <img src="assets/images/screens/how-to-play-screen.png">
+    </li>
+    <li>
+        Game<br>
+        <img src="assets/images/screens/game-screen.png">
+    </li>
+    <li>
+        Alert<br>
+        <img src="assets/images/screens/alert.png">
+    </li>
+</ol>
 <h1>Color Scheme</h1>
 <p>The Color scheme was chosen with contrast in mind and <a href="https://github.com/LittleCanOpener/Final_Assessment?tab=readme-ov-file#webaim" target="_blank">WebAIM</a> Helped alot</p>
 <ul>
