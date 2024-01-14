@@ -38,19 +38,23 @@
 <ol>
     <li>
         Main Menu<br>
-        <img src="assets/images/screens/mainmenu-screen.png">
+        <img src="assets/images/screens/mainmenu-screen.png"><br>
+        <p>The main menu screen is the first to greet the user where they can find a navigation bar that is easy to navigate and a logo on the opposite side with the currnet page name.</p>
     </li>
     <li>
         How To Play<br>
-        <img src="assets/images/screens/how-to-play-screen.png">
+        <img src="assets/images/screens/how-to-play-screen.png"><br>
+        <p>How to play is the another screen made with the intention to tell the user how to play with three sections, instructions that tells the user first a bit about the game. Gameplay will tell the player the concept of the game and last the Controls will let the player know how to move around. The navigation bar contains the Logo and what page the user is with a home button to return to the main menu.</p>
     </li>
     <li>
         Game<br>
-        <img src="assets/images/screens/game-screen.png">
+        <img src="assets/images/screens/game-screen.png"><br>
+        <p>Game screen is where the game is portrait and has a different color center so the player knows what is in play and what isn't, It includes a scoreboard. The Navigation contains a back button and the title of the page next to it.</p>
     </li>
     <li>
         Alert<br>
-        <img src="assets/images/screens/alert.png">
+        <img src="assets/images/screens/alert.png"><br>
+        <p>Alert will pop up whenever the user crashes into themselves or the grid. It will cast a shadow on the game and show you're score and let you choose to restart or return to the main menu. If the user clicks on the outside of the box it will disapare and you can use the back button to navigate back.</p>
     </li>
 </ol>
 <h1>Color Scheme</h1>
